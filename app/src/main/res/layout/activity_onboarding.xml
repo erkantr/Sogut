@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/background"
+    android:layout_height="match_parent"
+    tools:context=".activity.OnboardingActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/image_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:adjustViewBounds="true"
+                android:paddingTop="78dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic__image2"/>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_marginTop="33dp"
+                android:text="Tarihini Öğren!"
+                android:textSize="26sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/center"
+                android:layout_gravity="center"
+                android:text="Şehirde bulunan tarihi kişilikleri ziyaret et ve tarihe yüz tutmuş bilgileri öğren!"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="#333333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="bottom"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom|start"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_gravity="bottom|end"
+                        android:layout_height="match_parent"
+                        android:text="Geri"
+                        android:textSize="15sp"
+                        android:id="@+id/geri1"
+                        android:paddingBottom="49dp"
+                        android:paddingLeft="16dp"
+                        android:textColor="#666666"
+                        android:layout_width="wrap_content"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/linearIlerle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom|end"
+
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/ilerle_button"
+                        android:layout_width="88dp"
+                        android:layout_height="36dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="42dp"
+                        android:background="@drawable/button2"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/ilerle_button_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="İlerle"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+
+                        <ImageView
+                            android:id="@+id/ilerle_button_image"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_toRightOf="@id/ilerle_button_text"
+                            android:src="@drawable/ic_send" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

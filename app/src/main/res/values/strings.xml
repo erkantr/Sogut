@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sogut</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="metin1">Tüm hakları saklıdır.\n Herhangi bir fotoğrafın veya bilginin izinsiz kullanılması durumunda maddi ödeneği kabul etmiş sayılırsınız.</string>
+</resources>

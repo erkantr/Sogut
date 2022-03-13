@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/toplanti"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="19.52dp"
+                    android:layout_marginLeft="23.05dp"
+                    android:layout_height="wrap_content"
+                    android:background="#0000ffff"
+                    android:src="@drawable/ic_coolicon" />
+                <TextView
+                    android:id="@+id/page_title"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginLeft="40dp"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:text="Türbeler"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="right"
+                android:paddingBottom="3dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="14dp"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/kaydet_button"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/button_gray"
+                    android:gravity="center"
+                    android:layout_gravity="right">
+
+                    <ImageView
+                        android:id="@+id/kaydet_button_image"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_save_gray"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview1"
+                    android:layout_width="370dp"
+                    android:layout_height="214dp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview"
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+
+
+                        </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/baslik1"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/baslik"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="Hamidiye Camii"
+                            android:textColor="@color/black"
+                            android:textSize="19dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/saat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right">
+
+                        <Button
+                            style="@style/timeButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="21dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Her zaman açık"
+                            android:textAllCaps="false"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Adres:"
+                    android:textColor="#353535"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/ic_location" />
+
+                    <TextView
+                        android:id="@+id/konum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Orta, Dellal Sk. No:5, 11600 Söğüt/Bilecik"
+                        android:textColor="#353535"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Açık olduğu saatler:"
+                    android:textColor="#353535" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/ic_calendar" />
+
+                    <TextView
+                        android:id="@+id/zaman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5.5dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Her zaman"
+                        android:textColor="#56C568"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Tamamını gör"
+                        android:textColor="#737373"
+                        android:textSize="10sp" />
+
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="12dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_artwork" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Açıklama:"
+                    android:textColor="#353535" />
+
+                <TextView
+                    android:id="@+id/detay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-12dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:padding="16dp"
+                    android:text="13. yüzyıl sonlarında inşa edilen yapının yapım tarihi kesin olarak bilinmemektedir. İlk olarak Osman Gazi tarafından açık mezar olarak yaptırılmış, daha sonra I. Mehmed tarafından türbe haline getirilmiştir. Sultan III. Mustafa zamanında 1757’de yeniden yapılırcasına onarılmış ve ilk yapıldığı hali değişmiştir. 1886 yılında II. Abdülhamid tarafından yeniden onartılmış ve yanına çeşme eklenmiştir.
+
+Anadolu'ya gelmesi ve Söğüt'e yerleşmesi
+
+Anadolu Selçuklu Devleti'nin Bizans İmparatorluğu sınırında bulunan uç emirliklerindeki Türk sayısı, 1243 yılında gerçekleşen Kösedağ Muharebesi sonrasında Anadolu'da başlayan Moğol istilaları sebebiyle artış göstermiş; buna paralel olarak Bizans topraklarına yapılan akınlar artmıştı. Bu akınlar sonucunda, Bizans topraklarında ikinci defa uç beylikleri kurulmaya başlandı.
+Sultan Öyüğü (günümüzde Eskişehir) bölgesinde ise, uç topraklarının en ileri hattı olan Söğüt'te yerleşen Türk boyunun başında Ertuğrul Gazi bulunmaktaydı. Ertuğrul Gazi'ye bağlı boyun bu bölgeye ne zaman ve nasıl geldiği kesin olarak bilinmemekle birlikte, konu hakkında farklı görüşler mevcuttur.
+Ruhî Tarihi'ne göre Ertuğrul Gazi veya atalarının önderliğindeki 340 kişilik Türk boyu, Selçuklular ile birlikte Türkistan'ı terk edip Anadolu'ya gelerek Ankara civarındaki Karacadağ yakınlarına yerleşti.[9] 1222-1230 yılları arasında, İznik İmparatorluğu hükümdarı III. İoannis ile Anadolu Selçuklu Devleti Sultanı I. Alâeddin Keykubad arasında Eskişehir ve Ankara civarında gerçekleşen mücadelelerden haberdar olan Ertuğrul Gazi, orduya hizmet amacıyla çarpışmalara katıldı. Bu kapsamda Karacahisar'a yapılan kuşatmada yer aldı. Bunu memnuniyetle karşılayan I. Alâeddin Keykubad, Ertuğrul Gazi'yi akıncı başı yaptı."
+                    android:textColor="#353535"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/map_button"
+                android:layout_width="253dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button2"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/map_button_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Gitmek İstiyorum"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/map_button_image"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/map_button_text"
+                    android:src="@drawable/ic_send" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+                <RelativeLayout
+                    android:id="@+id/call_button"
+                    android:layout_width="74dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/button"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/call_button_image"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_call_calling" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

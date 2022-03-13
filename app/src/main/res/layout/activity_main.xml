@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/profile_background"
+            android:layout_width="match_parent"
+            android:background="@drawable/background2"
+            android:layout_height="220dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/profile_info"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginLeft="16dp"
+                    android:src="@drawable/ic_login"/>
+
+                <TextView
+                    android:id="@+id/kullanici_adi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginLeft="7dp"
+                    android:textColor="@color/white"
+                    android:textSize="19sp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Merhaba, \nDünyalı"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-52dp"
+            android:orientation="vertical"
+            android:background="@drawable/background_style">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Söğüt Rehber Uygulaması"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+
+
+                <SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    app:queryHint="Search"
+                    android:searchIcon="@drawable/ic_search_icon"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_search_background"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:paddingTop="16dp"
+                android:orientation="vertical"
+                android:id="@+id/linear_grid"
+                android:layout_height="match_parent">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <include layout="@layout/shimmer_item"/>
+                        <include layout="@layout/shimmer_item"/>
+                        <include layout="@layout/shimmer_item"/>
+                        <include layout="@layout/shimmer_item"/>
+                        <include layout="@layout/shimmer_item"/>
+                        <include layout="@layout/shimmer_item"/>
+                        <include layout="@layout/shimmer_item"/>
+                        <include layout="@layout/shimmer_item"/>
+                        <include layout="@layout/shimmer_item"/>
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="match_parent"/>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:visibility="visible"
+                    android:layout_height="match_parent">
+                    <GridLayout
+                        android:id="@+id/grid"
+                        android:columnCount="2"
+                        android:rowCount="3"
+                        android:useDefaultMargins="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <RelativeLayout
+                            android:id="@+id/tarihi_yerler_item"
+                            android:layout_width="167dp"
+                            android:layout_gravity="left"
+                            android:layout_height="167dp"
+                            android:layout_marginLeft="16dp"
+                            android:gravity="bottom|center"
+                            android:background="@drawable/tarihi_yerler_background">
+
+                            <TextView
+                                android:id="@+id/tarihi_yerler_item_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tarihi Yerler"
+                                android:layout_marginBottom="16dp"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/white"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/onemli_kisiler_item"
+                            android:layout_width="167dp"
+                            android:layout_gravity="right"
+                            android:layout_height="167dp"
+                            android:layout_marginRight="16dp"
+                            android:gravity="bottom|center"
+                            android:background="@drawable/onemli_kisiler_background">
+
+                            <TextView
+                                android:id="@+id/onemli_kisiler_item_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Önemli Kişiler"
+                                android:layout_marginBottom="16dp"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/white"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/diger_yerler_item"
+                            android:layout_width="167dp"
+                            android:layout_gravity="left"
+                            android:layout_height="167dp"
+                            android:layout_marginLeft="16dp"
+                            android:gravity="bottom|center"
+                            android:background="@drawable/diger_yerler_background">
+
+                            <TextView
+                                android:id="@+id/diger_yerler_item_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Diğer Yerler"
+                                android:layout_marginBottom="16dp"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/white"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/diger_bilgiler_item"
+                            android:layout_width="167dp"
+                            android:layout_gravity="right"
+                            android:layout_height="167dp"
+                            android:layout_marginRight="16dp"
+                            android:gravity="bottom|center"
+                            android:background="@drawable/diger_bilgiler_background">
+
+                            <TextView
+                                android:id="@+id/diger_bilgiler_item_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Diğer Bilgiler"
+                                android:layout_marginBottom="16dp"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/white"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/kaydedilenler_item"
+                            android:layout_width="167dp"
+                            android:layout_height="167dp"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="16dp"
+                            android:gravity="bottom|center"
+                            android:background="@drawable/kaydedilenler_background">
+
+                            <TextView
+                                android:id="@+id/kaydedilenler_item_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Kaydedilenler"
+                                android:layout_marginBottom="16dp"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textColor="@color/white"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/hakkinda_item"
+                            android:layout_width="167dp"
+                            android:layout_height="167dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/hakkinda_background"
+                            android:gravity="bottom|center">
+
+                            <TextView
+                                android:id="@+id/hakkinda_item_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Hakkında"
+                                android:textColor="@color/white"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+
+                    </GridLayout>
+
+                </ScrollView>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
