@@ -29,7 +29,7 @@
             <TextView
                 android:id="@+id/title"
                 android:layout_marginTop="33dp"
-                android:text="Tarihini Öğren!"
+                android:text="@string/tarihini_ogren"
                 android:textSize="26sp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/black"
@@ -38,7 +38,7 @@
             <TextView
                 android:id="@+id/center"
                 android:layout_gravity="center"
-                android:text="Şehirde bulunan tarihi kişilikleri ziyaret et ve tarihe yüz tutmuş bilgileri öğren!"
+                android:text="@string/metin2"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="#333333"
@@ -61,7 +61,7 @@
                     <TextView
                         android:layout_gravity="bottom|end"
                         android:layout_height="match_parent"
-                        android:text="Geri"
+                        android:text="@string/geri"
                         android:textSize="15sp"
                         android:id="@+id/geri1"
                         android:paddingBottom="49dp"
@@ -93,7 +93,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="İlerle"
+                            android:text="@string/ilerle"
                             android:textColor="@color/white"
                             android:textSize="13sp" />
 

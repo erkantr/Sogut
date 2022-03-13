@@ -36,7 +36,7 @@
                     android:layout_marginLeft="40dp"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content"
-                    android:text="Türbeler"
+                    android:text="@string/turbeler"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -116,7 +116,7 @@
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Hamidiye Camii"
+                            android:text="@string/hamidiye_camii"
                             android:textColor="@color/black"
                             android:textSize="19dp" />
 
@@ -134,7 +134,7 @@
                             android:layout_height="21dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginRight="16dp"
-                            android:text="Her zaman açık"
+                            android:text="@string/her_zaman_acik"
                             android:textAllCaps="false"
                             android:textSize="10sp" />
 
@@ -148,7 +148,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Adres:"
+                    android:text="@string/adres"
                     android:textColor="#353535"
                     android:textSize="12sp" />
 
@@ -171,7 +171,7 @@
                         android:layout_marginLeft="4dp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Orta, Dellal Sk. No:5, 11600 Söğüt/Bilecik"
+                        android:text="@string/hamidiye_adres"
                         android:textColor="#353535"
                         android:textSize="12sp" />
 
@@ -183,7 +183,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Açık olduğu saatler:"
+                    android:text="@string/acik_oldugu_saatler"
                     android:textColor="#353535" />
 
                 <LinearLayout
@@ -205,7 +205,7 @@
                         android:layout_marginLeft="5.5dp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Her zaman"
+                        android:text="@string/her_zaman"
                         android:textColor="#56C568"
                         android:textSize="12sp" />
 
@@ -215,7 +215,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Tamamını gör"
+                        android:text="@string/tamamini_gor"
                         android:textColor="#737373"
                         android:textSize="10sp" />
 
@@ -235,7 +235,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Açıklama:"
+                    android:text="@string/aciklama"
                     android:textColor="#353535" />
 
                 <TextView
@@ -245,13 +245,7 @@
                     android:layout_marginTop="-12dp"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="16dp"
-                    android:text="13. yüzyıl sonlarında inşa edilen yapının yapım tarihi kesin olarak bilinmemektedir. İlk olarak Osman Gazi tarafından açık mezar olarak yaptırılmış, daha sonra I. Mehmed tarafından türbe haline getirilmiştir. Sultan III. Mustafa zamanında 1757’de yeniden yapılırcasına onarılmış ve ilk yapıldığı hali değişmiştir. 1886 yılında II. Abdülhamid tarafından yeniden onartılmış ve yanına çeşme eklenmiştir.
-
-Anadolu'ya gelmesi ve Söğüt'e yerleşmesi
-
-Anadolu Selçuklu Devleti'nin Bizans İmparatorluğu sınırında bulunan uç emirliklerindeki Türk sayısı, 1243 yılında gerçekleşen Kösedağ Muharebesi sonrasında Anadolu'da başlayan Moğol istilaları sebebiyle artış göstermiş; buna paralel olarak Bizans topraklarına yapılan akınlar artmıştı. Bu akınlar sonucunda, Bizans topraklarında ikinci defa uç beylikleri kurulmaya başlandı.
-Sultan Öyüğü (günümüzde Eskişehir) bölgesinde ise, uç topraklarının en ileri hattı olan Söğüt'te yerleşen Türk boyunun başında Ertuğrul Gazi bulunmaktaydı. Ertuğrul Gazi'ye bağlı boyun bu bölgeye ne zaman ve nasıl geldiği kesin olarak bilinmemekle birlikte, konu hakkında farklı görüşler mevcuttur.
-Ruhî Tarihi'ne göre Ertuğrul Gazi veya atalarının önderliğindeki 340 kişilik Türk boyu, Selçuklular ile birlikte Türkistan'ı terk edip Anadolu'ya gelerek Ankara civarındaki Karacadağ yakınlarına yerleşti.[9] 1222-1230 yılları arasında, İznik İmparatorluğu hükümdarı III. İoannis ile Anadolu Selçuklu Devleti Sultanı I. Alâeddin Keykubad arasında Eskişehir ve Ankara civarında gerçekleşen mücadelelerden haberdar olan Ertuğrul Gazi, orduya hizmet amacıyla çarpışmalara katıldı. Bu kapsamda Karacahisar'a yapılan kuşatmada yer aldı. Bunu memnuniyetle karşılayan I. Alâeddin Keykubad, Ertuğrul Gazi'yi akıncı başı yaptı."
+                    android:text="@string/hamidiye_aciklama"
                     android:textColor="#353535"
                     android:textSize="14sp" />
 
@@ -290,7 +284,7 @@ Ruhî Tarihi'ne göre Ertuğrul Gazi veya atalarının önderliğindeki 340 kiş
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Gitmek İstiyorum"
+                    android:text="@string/gitmek_istiyorum"
                     android:textColor="@color/white"
                     android:textSize="13sp" />
 

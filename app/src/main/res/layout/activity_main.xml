@@ -40,7 +40,7 @@
                     android:textSize="19sp"
                     android:visibility="gone"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Merhaba, \nDünyalı"/>
+                    android:text="@string/merhaba_dunyali"/>
 
             </LinearLayout>
 
@@ -58,7 +58,7 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Söğüt Rehber Uygulaması"
+                android:text="@string/sogut_rehber_uygulamasi"
                 android:layout_marginTop="18dp"
                 android:layout_marginLeft="16dp"
                 android:fontFamily="@font/poppins_medium"
@@ -139,7 +139,7 @@
                                 android:id="@+id/tarihi_yerler_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Tarihi Yerler"
+                                android:text="@string/tarihi_yerler"
                                 android:layout_marginBottom="16dp"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppins_regular"
@@ -160,7 +160,7 @@
                                 android:id="@+id/onemli_kisiler_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Önemli Kişiler"
+                                android:text="@string/onemli_kisiler"
                                 android:layout_marginBottom="16dp"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppins_regular"
@@ -181,7 +181,7 @@
                                 android:id="@+id/diger_yerler_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Diğer Yerler"
+                                android:text="@string/diger_yerler"
                                 android:layout_marginBottom="16dp"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppins_regular"
@@ -202,7 +202,7 @@
                                 android:id="@+id/diger_bilgiler_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Diğer Bilgiler"
+                                android:text="@string/diger_bilgiler"
                                 android:layout_marginBottom="16dp"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppins_regular"
@@ -223,7 +223,7 @@
                                 android:id="@+id/kaydedilenler_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Kaydedilenler"
+                                android:text="@string/kaydedilenler"
                                 android:layout_marginBottom="16dp"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppins_regular"
@@ -246,7 +246,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="16dp"
                                 android:fontFamily="@font/poppins_regular"
-                                android:text="Hakkında"
+                                android:text="@string/hakkinda"
                                 android:textColor="@color/white"
                                 android:textSize="15sp" />
 
