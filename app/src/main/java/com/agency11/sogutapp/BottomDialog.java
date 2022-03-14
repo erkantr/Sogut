@@ -199,24 +199,41 @@ public class BottomDialog {
     }
 
     public void resetPasswordDialog() {
-        View view = activity.getLayoutInflater().inflate(R.layout.password_reset_dialog, null, false);
-        dialog = new BottomSheetDialog(activity, R.style.BottomSheetDialog);
+       // View view = activity.getLayoutInflater().inflate(R.layout.password_reset_dialog, null, false);
+       // dialog = new BottomSheetDialog(activity, R.style.BottomSheetDialog);
         Size size = new Size(activity);
+        Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.password_reset_dialog);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = Gravity.BOTTOM;
+        window.setAttributes(windowAttributes);
+        dialog.setCancelable(false);
 
 
-        LinearLayout linear_remember = view.findViewById(R.id.linear_remember);
-        TextView text_remember = view.findViewById(R.id.text_remember);
-        ImageView image_remember = view.findViewById(R.id.image_remember);
-        TextView text_remember2 = view.findViewById(R.id.text_remember2);
-        LinearLayout linear_remember1 = view.findViewById(R.id.linear_remember1);
-        TextInputLayout textinput_remember = view.findViewById(R.id.textinput_remember);
-        TextInputEditText mail = view.findViewById(R.id.mail);
-        RelativeLayout send = view.findViewById(R.id.send_button);
-        TextView send_button_text = view.findViewById(R.id.send_button_text);
-        ImageView send_button_image = view.findViewById(R.id.send_button_image);
-        LinearLayout linear_remember2 = view.findViewById(R.id.linear_remember2);
-        TextView text_remember3 = view.findViewById(R.id.text_remember3);
-        TextView login_text_remember = view.findViewById(R.id.login_text_remember);
+        RelativeLayout reset_layout = window.findViewById(R.id.reset_layout);
+        LinearLayout linear_remember = window.findViewById(R.id.linear_remember);
+        TextView text_remember = window.findViewById(R.id.text_remember);
+        ImageView image_remember = window.findViewById(R.id.image_remember);
+        TextView text_remember2 = window.findViewById(R.id.text_remember2);
+        LinearLayout linear_remember1 = window.findViewById(R.id.linear_remember1);
+        TextInputLayout textinput_remember = window.findViewById(R.id.textinput_remember);
+        TextInputEditText mail = window.findViewById(R.id.mail);
+        RelativeLayout send = window.findViewById(R.id.send_button);
+        TextView send_button_text = window.findViewById(R.id.send_button_text);
+        ImageView send_button_image = window.findViewById(R.id.send_button_image);
+        LinearLayout linear_remember2 = window.findViewById(R.id.linear_remember2);
+        TextView text_remember3 = window.findViewById(R.id.text_remember3);
+        TextView login_text_remember = window.findViewById(R.id.login_text_remember);
 
         size.setWidth(linear_remember, 190);
         size.setWidth(text_remember, 190);
@@ -238,6 +255,7 @@ public class BottomDialog {
         size.setSize(text_remember3, 12);
         size.setMargin(login_text_remember, 8, 0, 0, 0);
         size.setSize(login_text_remember, 12);
+        size.setHeight(reset_layout,641);
 
         send.setOnClickListener(view1 -> {
             String txt_email = mail.getText().toString();
@@ -259,7 +277,7 @@ public class BottomDialog {
                 });
             }
         });
-        dialog.setContentView(view);
+       // dialog.setContentView(window);
         dialog.show();
         dialog.getWindow().clearFlags(FLAG_DIM_BEHIND);
     }
