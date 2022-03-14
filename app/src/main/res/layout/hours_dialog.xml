@@ -27,7 +27,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Açık olma saatleri"
+                    android:text="@string/acik_olma_saatleri"
                     android:textColor="#333333"
                     android:textSize="14sp" />
 
