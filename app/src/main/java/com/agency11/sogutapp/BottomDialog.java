@@ -69,32 +69,49 @@ public class BottomDialog {
 
 
     public void loginDialog(int page) {
-        View view = activity.getLayoutInflater().inflate(R.layout.login_dialog, null, false);
-        dialog = new BottomSheetDialog(activity, R.style.BottomSheetDialog);
+        //View view = activity.getLayoutInflater().inflate(R.layout.login_dialog, null, false);
+        //dialog = new BottomSheetDialog(activity, R.style.BottomSheetDialog);
+        Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.login_dialog);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = Gravity.BOTTOM;
+        window.setAttributes(windowAttributes);
+        dialog.setCancelable(false);
         Size size = new Size(activity);
 
-        TextView devam_etmek_icin = view.findViewById(R.id.devam_etmek_icin);
-        ImageView image_close_square = view.findViewById(R.id.image_close_square);
-        TextView text_girisyap = view.findViewById(R.id.text_girisyap);
-        LinearLayout linear1 = view.findViewById(R.id.linear1);
-        TextInputLayout text_input_layout = view.findViewById(R.id.text_input_layout);
-        TextInputEditText mail = view.findViewById(R.id.mail);
-        TextInputLayout text_input_layout1 = view.findViewById(R.id.text_input_layout1);
-        TextInputEditText pass = view.findViewById(R.id.password);
-        RelativeLayout giris = view.findViewById(R.id.login_button);
-        TextView login_button_text = view.findViewById(R.id.login_button_text);
-        ImageView login_button_image = view.findViewById(R.id.login_button_image);
-        LinearLayout linear2 = view.findViewById(R.id.linear2);
-        View view_login = view.findViewById(R.id.view_login);
-        TextView text_yada = view.findViewById(R.id.text_yada);
-        View view_login1 = view.findViewById(R.id.view_login1);
-        LinearLayout linear3 = view.findViewById(R.id.linear3);
-        ImageView login_button_image1 = view.findViewById(R.id.login_button_image1);
-        ImageView login_button_image2 = view.findViewById(R.id.login_button_image2);
-        LinearLayout linear4 = view.findViewById(R.id.linear4);
-        TextView text_hesap = view.findViewById(R.id.text_hesap);
-        TextView kayit_ol = view.findViewById(R.id.register_text);
-        TextView forgot_password = view.findViewById(R.id.forgot_password);
+        RelativeLayout login_layout = window.findViewById(R.id.login_layout);
+        TextView devam_etmek_icin = window.findViewById(R.id.devam_etmek_icin);
+        ImageView image_close_square = window.findViewById(R.id.image_close_square);
+        TextView text_girisyap = window.findViewById(R.id.text_girisyap);
+        LinearLayout linear1 = window.findViewById(R.id.linear1);
+        TextInputLayout text_input_layout = window.findViewById(R.id.text_input_layout);
+        TextInputEditText mail = window.findViewById(R.id.mail);
+        TextInputLayout text_input_layout1 = window.findViewById(R.id.text_input_layout1);
+        TextInputEditText pass = window.findViewById(R.id.password);
+        RelativeLayout giris = window.findViewById(R.id.login_button);
+        TextView login_button_text = window.findViewById(R.id.login_button_text);
+        ImageView login_button_image = window.findViewById(R.id.login_button_image);
+        LinearLayout linear2 = window.findViewById(R.id.linear2);
+        View view_login = window.findViewById(R.id.view_login);
+        TextView text_yada = window.findViewById(R.id.text_yada);
+        View view_login1 = window.findViewById(R.id.view_login1);
+        LinearLayout linear3 = window.findViewById(R.id.linear3);
+        ImageView login_button_image1 = window.findViewById(R.id.login_button_image1);
+        ImageView login_button_image2 = window.findViewById(R.id.login_button_image2);
+        LinearLayout linear4 = window.findViewById(R.id.linear4);
+        TextView text_hesap = window.findViewById(R.id.text_hesap);
+        TextView kayit_ol = window.findViewById(R.id.register_text);
+        TextView forgot_password = window.findViewById(R.id.forgot_password);
 
         size.setWidth(devam_etmek_icin, 190);
         size.setMargin(devam_etmek_icin, 17, 42, 0, 0);
@@ -128,6 +145,7 @@ public class BottomDialog {
         size.setSize(kayit_ol, 12);
         size.setMargin(forgot_password, 64, 0, 0, 0);
         size.setSize(forgot_password, 12);
+        size.setHeight(login_layout,584);
 
         forgot_password.setOnClickListener(view1 -> {
             dialog.cancel();
@@ -192,7 +210,7 @@ public class BottomDialog {
             }
         });
 
-        dialog.setContentView(view);
+        //dialog.setContentView(window);
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         dialog.show();
         dialog.getWindow().clearFlags(FLAG_DIM_BEHIND);

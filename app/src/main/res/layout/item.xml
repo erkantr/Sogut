@@ -46,7 +46,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginLeft="12dp"
                         android:textColor="@color/black"
-                        android:text="@string/ertugrul_gazi_turbesi"
+                        android:text="Ertuğrul Gazi Türbesi"
                         android:fontFamily="@font/poppins_medium"
                         android:layout_height="wrap_content"/>
 
@@ -76,7 +76,7 @@
                 android:textSize="12sp"
                 android:textColor="@color/gray600"
                 android:layout_marginRight="48dp"
-                android:text="@string/ertugrul_gazi_veya_ertugrul"
+                android:text="Ertuğrul Gazi veya Ertuğrul Bey, 13. yüzyılın ortalarınd..."
                 android:fontFamily="@font/poppins_regular"
                 android:layout_height="match_parent"/>
 

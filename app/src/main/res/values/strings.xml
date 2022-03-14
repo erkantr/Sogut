@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Sogut</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="metin1">Tüm hakları saklıdır.\n Herhangi bir fotoğrafın veya bilginin izinsiz kullanılması durumunda maddi ödeneği kabul etmiş sayılırsınız.</string>
@@ -14,20 +15,14 @@
     <string name="kaydedilenler">Kaydedilenler</string>
     <string name="hakkinda">Hakkında</string>
     <string name="merhaba_dunyali">Merhaba, \nDünyalı</string>
-    <string name="fatih_demirkan">Fatih Demirkan</string>
-    <string name="arayuz_tasarimcisi">Arayüz Tasarımcısı</string>
-    <string name="kisa_bir_yazi">Buraya proje yapım süreci aşaması ile ilgili kısa bir yazı yazılacak.</string>
     <string name="iletisim_adresleri">İletişim adresleri</string>
     <string name="turbeler">Türbeler</string>
-    <string name="hamidiye_camii">Hamidiye Camii</string>
     <string name="her_zaman_acik">Her zaman açık</string>
     <string name="adres">Adres:</string>
-    <string name="hamidiye_adres">Orta, Dellal Sk. No:5, 11600 Söğüt/Bilecik</string>
     <string name="acik_oldugu_saatler">Açık olduğu saatler:</string>
     <string name="her_zaman">Her zaman</string>
     <string name="tamamini_gor">Tamamını gör</string>
     <string name="aciklama">Açıklama:</string>
-    <string name="hamidiye_aciklama">13. yüzyıl sonlarında inşa edilen yapının yapım tarihi kesin olarak bilinmemektedir. İlk olarak Osman Gazi tarafından açık mezar olarak yaptırılmış, daha sonra I. Mehmed tarafından türbe haline getirilmiştir. Sultan III. Mustafa zamanında 1757’de yeniden yapılırcasına onarılmış ve ilk yapıldığı hali değişmiştir. 1886 yılında II. Abdülhamid tarafından yeniden onartılmış ve yanına çeşme eklenmiştir. Anadolu\'ya gelmesi ve Söğüt\'e yerleşmesi Anadolu Selçuklu Devleti\'nin Bizans İmparatorluğu sınırında bulunan uç emirliklerindeki Türk sayısı, 1243 yılında gerçekleşen Kösedağ Muharebesi sonrasında Anadolu\'da başlayan Moğol istilaları sebebiyle artış göstermiş; buna paralel olarak Bizans topraklarına yapılan akınlar artmıştı. Bu akınlar sonucunda, Bizans topraklarında ikinci defa uç beylikleri kurulmaya başlandı. Sultan Öyüğü (günümüzde Eskişehir) bölgesinde ise, uç topraklarının en ileri hattı olan Söğüt\'te yerleşen Türk boyunun başında Ertuğrul Gazi bulunmaktaydı. Ertuğrul Gazi\'ye bağlı boyun bu bölgeye ne zaman ve nasıl geldiği kesin olarak bilinmemekle birlikte, konu hakkında farklı görüşler mevcuttur. Ruhî Tarihi\'ne göre Ertuğrul Gazi veya atalarının önderliğindeki 340 kişilik Türk boyu, Selçuklular ile birlikte Türkistan\'ı terk edip Anadolu\'ya gelerek Ankara civarındaki Karacadağ yakınlarına yerleşti.[9] 1222-1230 yılları arasında, İznik İmparatorluğu hükümdarı III. İoannis ile Anadolu Selçuklu Devleti Sultanı I. Alâeddin Keykubad arasında Eskişehir ve Ankara civarında gerçekleşen mücadelelerden haberdar olan Ertuğrul Gazi, orduya hizmet amacıyla çarpışmalara katıldı. Bu kapsamda Karacahisar\'a yapılan kuşatmada yer aldı. Bunu memnuniyetle karşılayan I. Alâeddin Keykubad, Ertuğrul Gazi\'yi akıncı başı yaptı.</string>
     <string name="gitmek_istiyorum">Gitmek İstiyorum</string>
     <string name="profil">Profil</string>
     <string name="sifre_ayarlari">Şifre ayarları</string>
@@ -35,7 +30,6 @@
     <string name="dil_ayarlari">Dil ayarları</string>
     <string name="dil_degistir">Dil değiştir</string> 
     <string name="hesap_ayarlari">Hesap ayarları</string>
-    <string name="ertugrul_gazi_turbesi">Ertuğrul Gazi Türbesi</string>
     <string name="ertugrul_gazi_veya_ertugrul">Ertuğrul Gazi veya Ertuğrul Bey, 13. yüzyılın ortalarınd...</string>
     <string name="devam_etmek_icin">Devam etmek için</string>
     <string name="giris_yap">Giriş Yap</string>
@@ -51,14 +45,14 @@
     <string name="bir_hesabin_var_mi">Bir hesabın var mı?</string>
     <string name="kullanici_adi">Kullanıcı adı</string>
     <string name="sifre_degistirme_basarili">Şifre Değiştirme \nBaşarılı</string>
-
     <string name="title_activity_ads">AdsActivity</string>
     <string name="action_settings">Settings</string>
-
-
+    <string name="acik_olma_saatleri">Açık olma saatleri</string>
+    <string name="dil_sec">Dil seç</string>
     <string name="interstitial_ad_sample">Interstitial Ad Sample</string>
     <string name="start_level">Level 1</string>
     <string name="next_level">Next Level</string>
+
     <!-- -
         This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
         For more information, see https://support.google.com/admob/answer/3052638
