@@ -121,7 +121,7 @@
                             android:layout_height="214dp"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="16dp"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             app:cardCornerRadius="5dp">
 
                             <ImageView
