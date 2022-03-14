@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/relative_layout"
     tools:context=".activity.MainActivity">
 
     <LinearLayout
@@ -14,7 +15,6 @@
         <LinearLayout
             android:id="@+id/profile_background"
             android:layout_width="match_parent"
-            android:background="@drawable/background2"
             android:layout_height="220dp">
 
             <LinearLayout
@@ -66,16 +66,28 @@
                 android:textColor="@color/black"/>
 
 
-                <SearchView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp">
+
+                <EditText
                     android:id="@+id/search_view"
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp"
-                    app:queryHint="Search"
-                    android:searchIcon="@drawable/ic_search_icon"
+                    android:hint="Search"
+                    android:textSize="12sp"
+                    android:padding="8dp"
+                    android:drawablePadding="8dp"
+                    android:includeFontPadding="false"
+                    android:drawableStart="@drawable/ic_search_icon"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColorHint="#E76B12"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_search_background"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

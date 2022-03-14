@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="myImages">
+        <item>R.drawable.background!</item>
+        <item>R.drawable.background2</item>
+        <item>R.drawable.background3</item>
+        <item>R.drawable.background4</item>
+        <item>R.drawable.background5</item>
+        <item>R.drawable.background6</item>
+        <item>R.drawable.background7</item>
+    </string-array>
+</resources>

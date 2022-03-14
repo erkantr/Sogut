@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="641dp"
+    android:id="@+id/register_layout"
     android:background="@drawable/background_style">
 
     <LinearLayout
@@ -14,9 +15,11 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/linear_register"
                 android:layout_width="190dp"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/text_register"
                     android:layout_width="190dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="42dp"
@@ -31,9 +34,10 @@
                 android:gravity="right"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/image_register"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="24.42dp"
-                    android:layout_marginRight="24.42dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="24dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_close_square"/>
 
@@ -42,6 +46,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/text_register1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kayıt ol"
@@ -51,12 +56,14 @@
             android:layout_marginLeft="17dp"/>
 
         <LinearLayout
+            android:id="@+id/linear_register1"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:padding="16dp"
             android:layout_marginTop="-20dp"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
@@ -73,6 +80,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_register1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
@@ -89,6 +97,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_register2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
@@ -136,6 +145,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/linear_register2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
@@ -143,13 +153,14 @@
             android:weightSum="12">
 
             <View
+                android:id="@+id/view_register"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="5"
                 android:background="#EAEAEA" />
 
             <TextView
-
+                android:id="@+id/text_register2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -160,6 +171,7 @@
                 android:textSize="10sp" />
 
             <View
+                android:id="@+id/view_register1"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="5"
@@ -167,6 +179,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_register3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
@@ -179,12 +192,13 @@
                 android:background="@drawable/ic_facebook"/>
 
             <ImageView
-
+                android:id="@+id/image_register_google"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="54dp"
                 android:background="@drawable/ic_google"/>
             <ImageView
+                android:id="@+id/image_register_linkedin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="54dp"
@@ -192,6 +206,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_register4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
@@ -199,6 +214,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/text_register3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
@@ -207,7 +223,7 @@
                 android:text="Bir hesabın var mı?"/>
 
             <TextView
-                android:id="@+id/login_text"
+                android:id="@+id/text_register4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"

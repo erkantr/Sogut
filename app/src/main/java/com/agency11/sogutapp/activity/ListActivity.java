@@ -36,8 +36,15 @@ public class ListActivity extends AppCompatActivity {
         shimmerFrameLayout.startShimmer();
         tarihi_yerlers = new ArrayList<>();
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
         adapter = new ListAdapter(ListActivity.this, tarihi_yerlers, false);
         readData = new ReadData(this,recyclerView,firebaseFirestore,shimmerFrameLayout,adapter);
+        recyclerView.setHasFixedSize(true);
+
         Intent intent = getIntent();
         String page = intent.getStringExtra("list");
         switch (page){

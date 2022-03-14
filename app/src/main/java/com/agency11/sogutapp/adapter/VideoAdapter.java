@@ -1,5 +1,6 @@
 package com.agency11.sogutapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;

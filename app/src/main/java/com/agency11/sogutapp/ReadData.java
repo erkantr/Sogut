@@ -2,10 +2,12 @@ package com.agency11.sogutapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,10 +20,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EventListener;
 import java.util.Map;
 
 public class ReadData {
@@ -74,6 +80,7 @@ public class ReadData {
                             recyclerView.setVisibility(View.VISIBLE);
                             adapter = new ListAdapter(mContext, tarihi_yerlers, false);
                             recyclerView.setAdapter(adapter);
+                            recyclerView.setHasFixedSize(true);
                             adapter.notifyDataSetChanged();
 
                         } else {
@@ -81,6 +88,68 @@ public class ReadData {
                         }
                     }
                 });
+    }
+
+    public void getSearchTarihiYerler(ArrayList<Tarihi_Yerler> tarihi_yerlers){
+
+        firebaseFirestore.collection("tarihiyerler").whereEqualTo("name", 1)
+                .addSnapshotListener(new com.google.firebase.firestore.EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            System.err.println("Listen failed:" + e);
+                            return;
+                        }
+                       //Tarihi_Yerler tarihi_yerlers = new ArrayList<Tarihi_Yerler>();
+
+                        for (DocumentSnapshot doc : snapshots) {
+                            Tarihi_Yerler user = doc.toObject(Tarihi_Yerler.class);
+                            tarihi_yerlers.add(user);
+                        }
+                        updateListUsers(tarihi_yerlers);
+                    }
+                });
+        }
+
+        public void searchTarihiYerler(String recherche, ArrayList<Tarihi_Yerler> tarihi_yerlers){
+            if (recherche.length() > 0)
+                recherche = recherche.substring(0, 1).toUpperCase() + recherche.substring(1).toLowerCase();
+
+            ArrayList<Tarihi_Yerler> results = new ArrayList<>();
+            for(Tarihi_Yerler user : tarihi_yerlers){
+                if(user.getName() != null && user.getName().contains(recherche)){
+                    results.add(user);
+                }
+            }
+            updateListUsers(results);
+        }
+
+    private void updateListUsers(ArrayList<Tarihi_Yerler> listUsers) {
+
+        // Sort the list by date
+        Collections.sort(listUsers, new Comparator<Tarihi_Yerler>() {
+            @Override
+            public int compare(Tarihi_Yerler o1, Tarihi_Yerler o2) {
+                int res = -1;
+                //if (o1.get() > (o2.getDate())) {
+                  //  res = 1;
+                //}
+                return res;
+            }
+        });
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext.getApplicationContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        adapter = new ListAdapter(mContext, listUsers, false);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        adapter.notifyDataSetChanged();
     }
 
     public void kaydedilenTarihiYerler(ArrayList<Tarihi_Yerler> tarihi_yerlers) {

@@ -1,15 +1,20 @@
 package com.agency11.sogutapp.activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,7 +29,12 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiController;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.PlayerUiController;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.menu.YouTubePlayerMenu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +49,6 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
     ImageListAdapter imageListAdapter;
     ArrayList<String> list;
     ArrayList<String> videoList;
-    RecyclerView recyclerView,recyclerView1;
     FirebaseUser firebaseUser;
     FirebaseAuth auth;
     VideoAdapter videoAdapter;
@@ -56,8 +65,7 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
         TextView pagetitle = findViewById(R.id.page_title);
         firebaseFirestore = FirebaseFirestore.getInstance();
         RelativeLayout relativeLayout = findViewById(R.id.map_button);
-        recyclerView = findViewById(R.id.recyclerview);
-        recyclerView1 = findViewById(R.id.recyclerview1);
+        YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
 
         RelativeLayout call = findViewById(R.id.call_button);
 
@@ -80,27 +88,35 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
         sharedPreferences = getSharedPreferences("id", Context.MODE_PRIVATE);
         new_id = sharedPreferences.getString(id, "");
 
-        list = images;
-        //list.addAll(Collections.singleton(videoId));
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        //recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        imageListAdapter = new ImageListAdapter(this, list);
-        recyclerView.setAdapter(imageListAdapter);
-        imageListAdapter.notifyDataSetChanged();
-
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        //LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getApplicationContext());
-        //linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
-        //recyclerView1.setLayoutManager(linearLayoutManager1);
-        recyclerView1.getLayoutParams().width = displayMetrics.widthPixels - 36;
-        videoList = new ArrayList<String>(Collections.singletonList(videoId));
-        videoAdapter = new VideoAdapter(this,videoList);
-        recyclerView1.setAdapter(videoAdapter);
-
         translator.translate(baslik,name,targetLanguage);
         translator.translate(detay_text,detay,targetLanguage);
+
+        getLifecycle().addObserver(youTubePlayerView);
+        youTubePlayerView.addYouTubePlayerListener(new  AbstractYouTubePlayerListener(){
+            @Override
+            public  void  onReady ( @NonNull YouTubePlayer youTubePlayer ) {
+
+
+
+                youTubePlayer.loadVideo(videoId, 0 );
+            }
+        });
+
+        int[] cards = new int[] {R.id.card_image0,R.id.card_image2,R.id.card_image3,R.id.card_image4,R.id.card_image5,
+                R.id.card_image6,R.id.card_image7,R.id.card_image8,R.id.card_image9,R.id.card_image10};
+
+        int[] imageId= new int[] {R.id.imageview0,R.id.imageview1,R.id.imageview2,R.id.imageview3,R.id.imageview4
+                ,R.id.imageview5,R.id.imageview6,R.id.imageview7,R.id.imageview8,R.id.imageview9,R.id.imageview10};
+
+        for (int i=0; i<images.size(); i++){
+            CardView cardView = findViewById(cards[i]);
+            cardView.setVisibility(View.VISIBLE);
+            System.out.println(i);
+            ImageView imageView = findViewById(imageId[i]);
+            imageView.setVisibility(View.VISIBLE);
+            Glide.with(this).load(images.get(i)).into(imageView);
+
+        }
 
         if(firebaseUser != null){
         kaydet.setOnClickListener(view -> {

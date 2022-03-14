@@ -1,5 +1,6 @@
 package com.agency11.sogutapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.agency11.sogutapp.activity.DetailActivity;
 import com.agency11.sogutapp.model.Tarihi_Yerler;
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Filterable {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private Context mContext;
     private ArrayList<Tarihi_Yerler> yerler;
@@ -33,6 +35,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     boolean time;
     private View view;
     ShimmerFrameLayout shimmerFrameLayout;
+    FirestoreRecyclerOptions<Tarihi_Yerler> tarihi_yerlerFirestoreRecyclerOptions;
 
 
     public ListAdapter(Context mContext, ArrayList<Tarihi_Yerler> yerler, boolean time){
@@ -106,11 +109,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         });
     }
 
+    /*
     @Override
     public Filter getFilter() {
         return filter;
     }
 
+     */
 
 
     /*
@@ -126,23 +131,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
 
      */
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView baslik;
-        ImageView image;
-        ImageView time;
-        TextView aciklama;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            baslik = itemView.findViewById(R.id.baslik);
-            image = itemView.findViewById(R.id.image);
-            time = itemView.findViewById(R.id.time);
-            aciklama = itemView.findViewById(R.id.aciklama);
-        }
-    }
-
+    /*
     Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
@@ -164,6 +153,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             return filterResults;
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             yerler.clear();
@@ -171,5 +161,24 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             notifyDataSetChanged();
         }
     };
+
+     */
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView baslik;
+        ImageView image;
+        ImageView time;
+        TextView aciklama;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            baslik = itemView.findViewById(R.id.baslik);
+            image = itemView.findViewById(R.id.image);
+            time = itemView.findViewById(R.id.time);
+            aciklama = itemView.findViewById(R.id.aciklama);
+        }
+    }
 
 }

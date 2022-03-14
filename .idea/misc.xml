@@ -40,23 +40,28 @@
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/drawable/ic_trash.xml" value="0.1505" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/drawable/time_background.xml" value="0.1505" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/activity_about.xml" value="0.22" />
-        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/activity_detail.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/activity_ads.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/activity_ads2.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/activity_detail.xml" value="0.12989434431323804" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/activity_list.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/activity_main.xml" value="0.1947463768115942" />
+        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/activity_onboarding.xml" value="0.16" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/activity_profile.xml" value="0.2" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/fragment_onboarding1.xml" value="0.18" />
+        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/hours_dialog.xml" value="0.18" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/image_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/language_dialog.xml" value="0.18" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/login_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/password_change_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/password_reset_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/possword_change_dialog.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/register_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/register_dialog.xml" value="0.2" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/shimmer_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/splash_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/successful_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/layout/video_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Cihan/AndroidStudioProjects/Sogut/app/src/main/res/menu/menu_ads.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

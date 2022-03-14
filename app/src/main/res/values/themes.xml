@@ -13,6 +13,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="AnimationPopup">
+        <item name="android:windowEnterAnimation">@anim/appear</item>
+        <item name="android:windowExitAnimation">@anim/disappear</item>
+    </style>
+
     <style name="AppTheme2" parent="Theme.Design.Light.NoActionBar">
         <item name="colorPrimary">#666666</item>
         <item name="colorPrimaryDark">#666666</item>
