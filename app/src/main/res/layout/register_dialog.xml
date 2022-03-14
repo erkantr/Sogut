@@ -24,7 +24,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="42dp"
                     android:layout_marginLeft="17dp"
-                    android:text="Devam etmek için"
+                    android:text="@string/devam_etmek_icin"
                     android:textSize="10sp"
                     android:fontFamily="@font/poppins_regular"/>
 
@@ -49,7 +49,7 @@
             android:id="@+id/text_register1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kayıt ol"
+            android:text="@string/kayit_ol"
             android:textColor="#E76B12"
             android:fontFamily="@font/poppins_regular"
             android:textSize="33dp"
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:textColorHint="#666666"
-                    android:hint="Kullanıcı adı"
+                    android:hint="@string/kullanici_adi"
                     android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:textColorHint="#666666"
                     android:inputType="textPersonName"
-                    android:hint="E-mail adresi"
+                    android:hint="@string/e_mail_adresi"
                     android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:textColorHint="#666666"
                     android:inputType="textPassword"
-                    android:hint="Şifre"
+                    android:hint="@string/sifre"
                     android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Kayıt ol"
+                android:text="@string/kayit_ol"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
 
@@ -164,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Ya da"
+                android:text="@string/ya_da"
                 android:fontFamily="@font/poppins_regular"
                 android:textAlignment="center"
                 android:textColor="#757575"
@@ -220,7 +220,7 @@
                 android:textSize="12sp"
                 android:textColor="#666666"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Bir hesabın var mı?"/>
+                android:text="@string/bir_hesabin_var_mi"/>
 
             <TextView
                 android:id="@+id/text_register4"
@@ -230,7 +230,7 @@
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="#2485E8"
-                android:text="Giriş yap"/>
+                android:text="@string/giris_yap"/>
         </LinearLayout>
 
     </LinearLayout>

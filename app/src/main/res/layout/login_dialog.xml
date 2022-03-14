@@ -25,7 +25,7 @@
                     android:layout_marginLeft="17dp"
                     android:layout_marginTop="42dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Devam etmek için"
+                    android:text="@string/devam_etmek_icin"
                     android:textSize="10sp" />
 
             </LinearLayout>
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Giriş Yap"
+            android:text="@string/giris_yap"
             android:textColor="#E76B12"
             android:textSize="33dp" />
 
@@ -75,7 +75,7 @@
                     android:id="@+id/mail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="E-mail Adresi"
+                    android:hint="@string/e_mail_adresi"
                     android:inputType="textEmailAddress"
                     android:textColorHint="#666666"
                     android:textSize="14sp" />
@@ -92,7 +92,7 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Şifre"
+                    android:hint="@string/sifre"
                     android:inputType="textPassword"
                     android:textColorHint="#666666"
                     android:textSize="14sp" />
@@ -116,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Giriş yap"
+                android:text="@string/giris_yap"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
 
@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Ya da"
+                android:text="@string/ya_da"
                 android:textAlignment="center"
                 android:textColor="#757575"
                 android:textSize="10sp" />
@@ -205,7 +205,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Bir hesabın yok mu?"
+                android:text="@string/bir_hesabin_yok_mu"
                 android:textColor="#666666"
                 android:textSize="12sp" />
 
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Kayıt ol"
+                android:text="@string/kayit_ol"
                 android:textColor="#2485E8"
                 android:textSize="12sp" />
 
@@ -225,7 +225,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="64dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Şifremi unuttum"
+                android:text="@string/sifremi_unuttum"
                 android:textColor="#2485E8"
                 android:textSize="12sp" />
         </LinearLayout>

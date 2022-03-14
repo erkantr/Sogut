@@ -14,56 +14,54 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/toplanti"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="23.05dp"
                     android:layout_marginTop="19.52dp"
+                    android:layout_marginLeft="23.05dp"
+                    android:layout_height="wrap_content"
                     android:background="#0000ffff"
                     android:src="@drawable/ic_coolicon" />
-
                 <TextView
                     android:id="@+id/page_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="18dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Türbeler"
+                    android:layout_marginLeft="40dp"
                     android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:text="Türbeler"
+                    android:fontFamily="@font/poppins_regular"
                     android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:layout_marginRight="16dp"
                 android:gravity="right"
-                android:paddingBottom="3dp">
+                android:paddingBottom="3dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="14dp"
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:id="@+id/kaydet_button"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:layout_gravity="right"
                     android:background="@drawable/button_gray"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_gravity="right">
 
                     <ImageView
                         android:id="@+id/kaydet_button_image"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/ic_save_gray" />
+                        android:src="@drawable/ic_save_gray"/>
 
                 </RelativeLayout>
 
@@ -318,7 +316,7 @@
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Hamidiye Camii"
+                            android:text="@string/hamidiye_camii"
                             android:textColor="@color/black"
                             android:textSize="19dp" />
 
@@ -336,7 +334,7 @@
                             android:layout_height="21dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginRight="16dp"
-                            android:text="Her zaman açık"
+                            android:text="@string/her_zaman_acik"
                             android:textAllCaps="false"
                             android:textSize="10sp" />
 
@@ -350,7 +348,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Adres:"
+                    android:text="@string/adres"
                     android:textColor="#353535"
                     android:textSize="12sp" />
 
@@ -385,7 +383,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Açık olduğu saatler:"
+                    android:text="@string/acik_oldugu_saatler"
                     android:textColor="#353535" />
 
                 <LinearLayout
@@ -407,7 +405,7 @@
                         android:layout_marginLeft="5.5dp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Her zaman"
+                        android:text="@string/her_zaman"
                         android:textColor="#56C568"
                         android:textSize="12sp" />
 
@@ -417,7 +415,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Tamamını gör"
+                        android:text="@string/tamamini_gor"
                         android:textColor="#737373"
                         android:textSize="10sp" />
 
@@ -437,7 +435,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Açıklama:"
+                    android:text="@string/aciklama"
                     android:textColor="#353535" />
 
                 <TextView
@@ -468,10 +466,10 @@ Ruhî Tarihi'ne göre Ertuğrul Gazi veya atalarının önderliğindeki 340 kiş
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:gravity="center"
         android:layout_marginBottom="20dp"
-        android:background="@color/white"
-        android:gravity="center">
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -492,7 +490,7 @@ Ruhî Tarihi'ne göre Ertuğrul Gazi veya atalarının önderliğindeki 340 kiş
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Gitmek İstiyorum"
+                    android:text="@string/gitmek_istiyorum"
                     android:textColor="@color/white"
                     android:textSize="13sp" />
 

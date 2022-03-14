@@ -33,7 +33,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="18dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Hakkında"
+                android:text="@string/hakkinda"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -76,7 +76,7 @@
                             android:layout_marginLeft="24dp"
                             android:layout_marginTop="24dp"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Fatih Demirkan"
+                            android:text="@string/fatih_demirkan"
                             android:textColor="#E76B12"
                             android:textSize="19sp" />
 
@@ -88,7 +88,7 @@
                             android:layout_marginLeft="24dp"
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Arayüz Tasarımcısı"
+                            android:text="@string/arayuz_tasarimcisi"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -100,7 +100,7 @@
                             android:layout_marginRight="24dp"
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Buraya proje yapım süreci aşaması ile ilgili kısa bir yazı yazılacak."
+                            android:text="@string/kisa_bir_yazi"
                             android:textColor="#000000"
                             android:textSize="12sp" />
 
@@ -111,7 +111,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="60dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="İletişim adresleri"
+                            android:text="@string/iletisim_adresleri"
                             android:textColor="#2C4EC6"
                             android:textSize="10sp" />
 
@@ -183,7 +183,7 @@
                             android:layout_marginLeft="24dp"
                             android:layout_marginTop="24dp"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Fatih Demirkan"
+                            android:text="@string/fatih_demirkan"
                             android:textColor="#E76B12"
                             android:textSize="19sp" />
 
@@ -195,7 +195,7 @@
                             android:layout_marginLeft="24dp"
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Arayüz Tasarımcısı"
+                            android:text="@string/arayuz_tasarimcisi"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -207,7 +207,7 @@
                             android:layout_marginRight="24dp"
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Buraya proje yapım süreci aşaması ile ilgili kısa bir yazı yazılacak."
+                            android:text="@string/kisa_bir_yazi"
                             android:textColor="#000000"
                             android:textSize="12sp" />
 
@@ -218,7 +218,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="60dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="İletişim adresleri"
+                            android:text="@string/iletisim_adresleri"
                             android:textColor="#2C4EC6"
                             android:textSize="10sp" />
 

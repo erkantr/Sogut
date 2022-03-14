@@ -33,7 +33,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="18dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Profil"
+                android:text="@string/profil"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -84,7 +84,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Şifre ayarları"
+            android:text="@string/sifre_ayarlari"
             android:textColor="#666666"
             android:textSize="12sp" />
 
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_weight="1"
-                android:text="Şifremi değiştir"
+                android:text="@string/sifremi_degistir"
                 android:textColor="#333333"
                 android:textSize="13sp" />
 
@@ -140,7 +140,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Dil ayarları"
+            android:text="@string/dil_ayarlari"
             android:textColor="#666666"
             android:textSize="12sp" />
 
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_weight="1"
-                android:text="Dil değiştir"
+                android:text="@string/dil_degistir"
                 android:textColor="#333333"
                 android:textSize="13sp" />
 
@@ -196,7 +196,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Hesap ayarları"
+            android:text="@string/hesap_ayarlari"
             android:textColor="#666666"
             android:textSize="12sp" />
 
