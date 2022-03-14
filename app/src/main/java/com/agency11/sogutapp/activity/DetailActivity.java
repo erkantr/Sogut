@@ -1,26 +1,26 @@
 package com.agency11.sogutapp.activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.agency11.sogutapp.BottomDialog;
+import com.agency11.sogutapp.map.MapsActivity;
 import com.agency11.sogutapp.R;
 import com.agency11.sogutapp.Translator;
 import com.agency11.sogutapp.adapter.ImageListAdapter;
@@ -32,13 +32,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiController;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.PlayerUiController;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.menu.YouTubePlayerMenu;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.Date;
 import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity implements VideoAdapter.AddLifecycleCallbackListener {
@@ -64,8 +61,10 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
         ImageView kaydet_image = findViewById(R.id.kaydet_button_image);
         TextView pagetitle = findViewById(R.id.page_title);
         firebaseFirestore = FirebaseFirestore.getInstance();
-        RelativeLayout relativeLayout = findViewById(R.id.map_button);
+        RelativeLayout map_button = findViewById(R.id.map_button);
         YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
+        Button time_button = findViewById(R.id.time_button);
+        TextView konum = findViewById(R.id.konum);
 
         RelativeLayout call = findViewById(R.id.call_button);
 
@@ -91,6 +90,54 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
         translator.translate(baslik,name,targetLanguage);
         translator.translate(detay_text,detay,targetLanguage);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+        Date d = new Date();
+        String dayOfTheWeek = sdf.format(d);
+        Toast.makeText(this, dayOfTheWeek, Toast.LENGTH_SHORT).show();
+
+        konum.setText(location.get(0));
+
+        for (int i=0; i < times.size(); i++){
+            String time = times.get(i).toLowerCase();
+            if (time.matches("her zaman açık")){
+                //holder.time.setBackgroundResource(R.drawable.ic_ellipse_1);
+                time_button.setBackgroundResource(R.drawable.time_background);
+                time_button.setTextColor(getResources().getColor(R.color.primary_green));
+                time_button.setText("Her zaman açık");
+
+            } else if (time.matches("kapalı") && time.matches(dayOfTheWeek)){
+                time_button.setBackgroundResource(R.drawable.clan);
+                time_button.setTextColor(getResources().getColor(R.color.yellow_variant));
+                time_button.setText("Kapalı");
+            }  else {
+                time_button.setBackgroundResource(R.drawable.time_background);
+                time_button.setTextColor(getResources().getColor(R.color.primary_green));
+                time_button.setText("Şu an açık");
+            }
+        }
+
+        /*
+        else if (time.matches(dayOfTheWeek) ){
+            time_button.setBackgroundResource(R.drawable.time_background);
+            time_button.setTextColor(getResources().getColor(R.color.primary_green));
+            time_button.setText("Şu an açık");
+        }
+
+         */
+
+        //MapsActivity.latitude = location.get(2);
+        map_button.setOnClickListener(view -> {
+            if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                Intent map_intent = new Intent(DetailActivity.this, MapsActivity.class);
+                map_intent.putExtra("name", name);
+                startActivity(map_intent);
+            } else {
+                ActivityCompat.requestPermissions(DetailActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+                Toast.makeText(this, "Konum izni gerekli", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         getLifecycle().addObserver(youTubePlayerView);
         youTubePlayerView.addYouTubePlayerListener(new  AbstractYouTubePlayerListener(){
             @Override
@@ -102,7 +149,7 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
             }
         });
 
-        int[] cards = new int[] {R.id.card_image0,R.id.card_image2,R.id.card_image3,R.id.card_image4,R.id.card_image5,
+        int[] cards = new int[] {R.id.card_image0, R.id.card_image1,R.id.card_image2,R.id.card_image3,R.id.card_image4,R.id.card_image5,
                 R.id.card_image6,R.id.card_image7,R.id.card_image8,R.id.card_image9,R.id.card_image10};
 
         int[] imageId= new int[] {R.id.imageview0,R.id.imageview1,R.id.imageview2,R.id.imageview3,R.id.imageview4
@@ -120,6 +167,10 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
 
         if(firebaseUser != null){
         kaydet.setOnClickListener(view -> {
+            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+            SharedPreferences.Editor editor2 = sharedPreferences.edit();
+            editor2.putString(id + "=date", currentDate);
+            editor2.apply();
             String new_id2 = sharedPreferences.getString(id,"");
             if (new_id2 != null && new_id2.equals(id)) {
                 sharedPreferences.edit().remove(id).apply();
@@ -165,5 +216,13 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
     @Override
     public void addLifeCycleCallBack(YouTubePlayerView youTubePlayerView) {
             getLifecycle().addObserver(youTubePlayerView);
+    }
+
+    public boolean checkLocationPermission() {
+        if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            return true;}
+        else {
+            ActivityCompat.requestPermissions(DetailActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+            return false;}
     }
 }

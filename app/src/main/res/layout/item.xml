@@ -20,7 +20,7 @@
             android:layout_width="96dp"
             app:cardCornerRadius="5dp"
             android:layout_gravity="center"
-            android:layout_height="96dp">
+            android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
@@ -74,8 +74,23 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginLeft="12dp"
                 android:textSize="12sp"
+                android:textColor="@color/gray600"
                 android:layout_marginRight="48dp"
                 android:text="@string/ertugrul_gazi_veya_ertugrul"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/tarih"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:textSize="12sp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginRight="48dp"
+                android:textColor="#56C568"
+                android:text="16/03/2021 tarihinde kaydedildi"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_height="match_parent"/>
         </LinearLayout>

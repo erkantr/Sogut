@@ -3,6 +3,7 @@ package com.agency11.sogutapp.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,14 @@ import com.agency11.sogutapp.model.Tarihi_Yerler;
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
@@ -69,10 +72,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         Glide.with(mContext).load(images.get(0)).into(holder.image);
 
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
-
+        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
         Date d = new Date();
         String dayOfTheWeek = sdf.format(d);
         System.out.println(dayOfTheWeek);
+
+
 
         for (int i=0; i < times.size(); i++){
             String time = times.get(i).toLowerCase();
@@ -83,7 +88,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             } else if (time.matches(dayOfTheWeek) ){
                 holder.time.setBackgroundResource(R.drawable.ic_ellipse_1);
             } else {
-                holder.time.setBackgroundResource(R.drawable.ic_ellipse_2);
+                holder.time.setBackgroundResource(R.drawable.ic_ellipse_1);
             }
         }
 

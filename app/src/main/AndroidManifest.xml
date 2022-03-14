@@ -6,6 +6,8 @@
     <!-- Include required permissions for Google Mobile Ads to run. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +27,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name=".AdsActivity"
+            android:name=".activity.AdsActivity"
             android:exported="false"
             android:label="@string/title_activity_ads" />
         <!-- Include the AdActivity configChanges and theme. -->
@@ -53,10 +55,10 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyDib9LERPzu_gBtR9staLTqjMM8yWBAWo4" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".map.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
@@ -70,7 +72,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.SplashScreen"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/Theme.Sogut">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

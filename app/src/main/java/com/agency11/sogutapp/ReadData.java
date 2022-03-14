@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.agency11.sogutapp.adapter.ListAdapter;
 import com.agency11.sogutapp.model.Tarihi_Yerler;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -62,11 +63,12 @@ public class ReadData {
                                         document.getData().get("exp").toString(),
                                         (ArrayList<String>) document.get("imageUrl"),
                                         (ArrayList<String>) document.get("location"),
-                                        document.getData().get("image").toString(),
+                                       // document.getData().get("image").toString(),
                                         document.getData().get("name").toString(),
                                         document.getData().get("phone").toString(),
                                         (ArrayList<String>) document.get("times"),
-                                        document.getData().get("videoId").toString());
+                                        document.getData().get("videoId").toString(),
+                                        document.getGeoPoint("location_id"));
 
 
                                 tarihi_yerlers.add(update);
@@ -167,15 +169,18 @@ public class ReadData {
                             documentSnapshot.getData().get("exp").toString(),
                             (ArrayList<String>) documentSnapshot.get("imageUrl"),
                             (ArrayList<String>) documentSnapshot.get("location"),
-                            documentSnapshot.getData().get("image").toString(),
+                           // documentSnapshot.getData().get("image").toString(),
                             documentSnapshot.getData().get("name").toString(),
                             documentSnapshot.getData().get("phone").toString(),
                             (ArrayList<String>) documentSnapshot.get("times"),
-                            documentSnapshot.getData().get("videoId").toString());
+                            documentSnapshot.getData().get("videoId").toString(),
+                            documentSnapshot.getGeoPoint("location_id"));
 
 
                     tarihi_yerlers.add(update);
 
+                    shimmerFrameLayout.stopShimmer();
+                    shimmerFrameLayout.setVisibility(View.GONE);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext.getApplicationContext());
                     linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                     recyclerView.setLayoutManager(linearLayoutManager);
