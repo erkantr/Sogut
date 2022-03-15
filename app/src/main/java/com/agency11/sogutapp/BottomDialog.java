@@ -665,14 +665,50 @@ public class BottomDialog {
         window.setAttributes(windowAttributes);
         dialog.setCancelable(false);
 
-        CardView tr = window.findViewById(R.id.tr);
-        CardView ar = window.findViewById(R.id.ar);
-        CardView ru = window.findViewById(R.id.ru);
-        ImageView uk = window.findViewById(R.id.uk);
-        CardView ua = window.findViewById(R.id.ua);
-        CardView pak = window.findViewById(R.id.pak);
+        Size size = new Size(activity);
+
+        TextView dil_sec = window.findViewById(R.id.dil_sec);
         ImageView close = window.findViewById(R.id.close);
+        LinearLayout linear_activity = window.findViewById(R.id.linear_activity);
+        View view_activity = window.findViewById(R.id.view_activity);
+        LinearLayout linear_activity2 = window.findViewById(R.id.linear_activity2);
+        ImageView tr = window.findViewById(R.id.tr);
+        ImageView uk = window.findViewById(R.id.uk);
+        ImageView ua = window.findViewById(R.id.ua);
+        LinearLayout linear_activity3 = window.findViewById(R.id.linear_activity3);
+        ImageView ar = window.findViewById(R.id.ar);
+        ImageView pak = window.findViewById(R.id.pak);
+        ImageView ru = window.findViewById(R.id.ru);
         CardView main_card = window.findViewById(R.id.main_card);
+
+        size.setWidth(dil_sec,47);
+        size.setHeight(dil_sec,21);
+        size.setMargin(dil_sec,16,18,0,0);
+        size.setSize(dil_sec,14);
+        size.setMargin(close,240,16,0,0);
+        size.setMargin(linear_activity,0,17,0,0);
+        size.setHeight(view_activity,1);
+        size.setWidth(view_activity,0);
+        size.setMargin(linear_activity2,0,21,0,0);
+        size.setWidth(tr,63);
+        size.setHeight(tr,63);
+        size.setWidth(uk,63);
+        size.setHeight(uk,63);
+        size.setMargin(uk,53,0,0,0);
+        size.setWidth(ua,63);
+        size.setHeight(ua,63);
+        size.setMargin(linear_activity3,24,24,0,0);
+        size.setWidth(ar,63);
+        size.setHeight(ar,63);
+        size.setWidth(pak,63);
+        size.setHeight(pak,63);
+        size.setWidth(ru,63);
+        size.setHeight(ru,63);
+        size.setWidth(main_card,343);
+        size.setHeight(main_card,323);
+
+
+
 
         close.setOnClickListener(view -> {
             dialog.dismiss();
@@ -689,6 +725,51 @@ public class BottomDialog {
         dialog.show();
         dialog.getWindow().setWindowAnimations(R.style.AnimationPopup);
         //dialog.getWindow().getAttributes().windowAnimations = FLAG_DIM_BEHIND;
+        dialog.getWindow().clearFlags(FLAG_DIM_BEHIND);
+    }
+
+    public void hoursDialog() {
+        Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.hours_dialog);
+        Size size = new Size(activity);
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = Gravity.BOTTOM;
+        window.setAttributes(windowAttributes);
+        dialog.setCancelable(false);
+
+
+        CardView main_card = window.findViewById(R.id.main_card);
+        TextView text_hours = window.findViewById(R.id.text_hours);
+        ImageView close = window.findViewById(R.id.close);
+        LinearLayout linear_activity = window.findViewById(R.id.linear_activity);
+        View view_activity = window.findViewById(R.id.view_activity);
+
+        size.setWidth(main_card,343);
+        size.setHeight(main_card,323);
+        size.setMargin(text_hours,16,18,0,0);
+        size.setSize(text_hours,14);
+        size.setMargin(close,158,16,0,0);
+        size.setMargin(linear_activity,0,17,0,0);
+        size.setWidth(view_activity,0);
+        size.setHeight(view_activity,1);
+
+
+        close.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+
+        float v=0;
+
+        dialog.show();
+        dialog.getWindow().setWindowAnimations(R.style.AnimationPopup);
         dialog.getWindow().clearFlags(FLAG_DIM_BEHIND);
     }
 
