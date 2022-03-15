@@ -1,5 +1,6 @@
-package com.agency11.sogutapp;
+package com.agency11.sogutapp.activity;
 
+import com.agency11.sogutapp.R;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;

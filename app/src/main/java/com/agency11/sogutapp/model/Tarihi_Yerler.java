@@ -2,6 +2,8 @@ package com.agency11.sogutapp.model;
 
 import android.widget.ImageView;
 
+import com.google.firebase.firestore.GeoPoint;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
@@ -11,18 +13,18 @@ public class Tarihi_Yerler {
     private String exp;
     private ArrayList<String> imageUrl;
     private ArrayList<String> location;
-    private String image;
     private String name;
     private String phone;
     private String id;
     private ArrayList<String> times;
     private String videoId;
+    private GeoPoint location_id;
 
     public Tarihi_Yerler(){
 
     }
 
-    public Tarihi_Yerler(String id,String exp, ArrayList<String> imageUrl, ArrayList<String> location, String image, String name, String phone, ArrayList<String> times,String videoId) {
+    public Tarihi_Yerler(String id,String exp, ArrayList<String> imageUrl, ArrayList<String> location, String name, String phone, ArrayList<String> times,String videoId,GeoPoint location_id) {
         this.exp = exp;
         this.id = id;
         this.imageUrl = imageUrl;
@@ -30,8 +32,8 @@ public class Tarihi_Yerler {
         this.name = name;
         this.phone = phone;
         this.times = times;
-        this.image = image;
         this.videoId = videoId;
+        this.location_id = location_id;
     }
 
     public String getId() {
@@ -40,14 +42,6 @@ public class Tarihi_Yerler {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getExp() {
@@ -104,5 +98,13 @@ public class Tarihi_Yerler {
 
     public void setVideoId(String videoId) {
         this.videoId = videoId;
+    }
+
+    public GeoPoint getLocation_id() {
+        return location_id;
+    }
+
+    public void setLocation_id(GeoPoint location_id) {
+        this.location_id = location_id;
     }
 }

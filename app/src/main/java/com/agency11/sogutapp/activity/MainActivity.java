@@ -2,11 +2,15 @@ package com.agency11.sogutapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -244,12 +248,12 @@ public class MainActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean b) {
                 if (b) {
                     //recyclerView.setVisibility(View.VISIBLE);
-                   // shimmerFrameLayout.setVisibility(View.VISIBLE);
-                    //shimmerFrameLayout.startShimmer();
+                    shimmerFrameLayout.setVisibility(View.VISIBLE);
+                    shimmerFrameLayout.startShimmer();
                     //recyclerView.setAdapter(adapter);
                     //recyclerView.setHasFixedSize(true);
                 } else {
-                    //recyclerView.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
                     shimmerFrameLayout.setVisibility(View.GONE);
                 }
             }
@@ -267,7 +271,49 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                readData.searchTarihiYerler(editable.toString(),tarihi_yerlers);
+                //readData.searchTarihiYerler(editable.toString(),tarihi_yerlers);
+
+
+                if (editable.toString().isEmpty()){
+                    adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
+                    readData = new ReadData(MainActivity.this, recyclerView, firebaseFirestore, shimmerFrameLayout, adapter);
+                    readData.tarihiYerler(tarihi_yerlers);
+                } else {
+
+                Query query = FirebaseFirestore.getInstance().collection("tarihiyerler")
+                        .whereEqualTo("name", editable.toString());
+
+                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Tarihi_Yerler update = new Tarihi_Yerler(
+                                        document.getId(),
+                                        document.getData().get("exp").toString(),
+                                        (ArrayList<String>) document.get("imageUrl"),
+                                        (ArrayList<String>) document.get("location"),
+                                       // document.getData().get("image").toString(),
+                                        document.getData().get("name").toString(),
+                                        document.getData().get("phone").toString(),
+                                        (ArrayList<String>) document.get("times"),
+                                        document.getData().get("videoId").toString(),
+                                        document.getGeoPoint("location_id"));
+
+
+                                tarihi_yerlers.add(update);
+                            }
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
+                            recyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+            }
                 /*
                 if (editable.toString().isEmpty()){
                     adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
@@ -310,8 +356,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                  */
-            }
-        });
+                }
+
+            });
         /*
         search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -331,7 +378,7 @@ public class MainActivity extends AppCompatActivity {
 
          */
 
-    }
+                                      }
     /*
     public void Filtre(String a) {
         adapter.getFilter().filter(a);

@@ -2,7 +2,9 @@ package com.agency11.sogutapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -24,6 +26,9 @@ public class SplashScreen extends AppCompatActivity {
         size.setWidth(splashImageView,300);
         size.setHeight(splashImageView,300);
 
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        String status = sharedPreferences.getString("status","");
+
         splashThread = new Thread() {
 
             @Override
@@ -35,7 +40,15 @@ public class SplashScreen extends AppCompatActivity {
                 } catch (InterruptedException ex) {
 
                 } finally {
-                    startActivity(new Intent(SplashScreen.this, OnboardingActivity.class));
+
+                    if (status.equals("1")){
+                        startActivity(new Intent(SplashScreen.this,MainActivity.class));
+                    } else {
+                        startActivity(new Intent(SplashScreen.this, OnboardingActivity.class));
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("status", "1");
+                        editor.apply();
+                    }
                     finish();
                 }
 
