@@ -64,10 +64,10 @@
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.32019927536231885" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.32019927536231885" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/hours_dialog.xml" value="0.32019927536231885" />
+        <entry key="app/src/main/res/layout/hours_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/image_item.xml" value="0.32019927536231885" />
         <entry key="app/src/main/res/layout/item.xml" value="0.32019927536231885" />
-        <entry key="app/src/main/res/layout/language_dialog.xml" value="0.32019927536231885" />
+        <entry key="app/src/main/res/layout/language_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/login_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/password_change_dialog.xml" value="0.32019927536231885" />
         <entry key="app/src/main/res/layout/password_reset_dialog.xml" value="0.32019927536231885" />
