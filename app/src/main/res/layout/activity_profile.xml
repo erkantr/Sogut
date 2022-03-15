@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".activity.ProfileActivity">
 
@@ -50,7 +51,8 @@
                 android:layout_height="54dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/profile" />
+                android:adjustViewBounds="true"
+                android:src="@drawable/profile" />
 
             <TextView
                 android:id="@+id/kullanici_adi"
@@ -59,7 +61,6 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="31dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Adnan Büyük"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -89,6 +90,7 @@
             android:textSize="12sp" />
 
         <LinearLayout
+            android:id="@+id/change_pass_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -145,6 +147,7 @@
             android:textSize="12sp" />
 
         <LinearLayout
+            android:id="@+id/change_lang_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

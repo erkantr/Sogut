@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/relative_layout"
+    android:background="@color/white"
     tools:context=".activity.MainActivity">
 
     <LinearLayout
@@ -67,6 +68,7 @@
 
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -145,17 +147,17 @@
                             android:layout_height="167dp"
                             android:layout_marginLeft="16dp"
                             android:gravity="bottom|center"
-                            android:background="@drawable/tarihi_yerler_background">
+                            android:background="@drawable/tarihi_yerler_item">
 
                             <TextView
                                 android:id="@+id/tarihi_yerler_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/tarihi_yerler"
                                 android:layout_marginBottom="16dp"
-                                android:textSize="15sp"
-                                android:fontFamily="@font/poppins_regular"
-                                android:textColor="@color/white"/>
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="@string/tarihi_yerler"
+                                android:textColor="@color/white"
+                                android:textSize="15sp" />
 
                         </RelativeLayout>
 
@@ -166,17 +168,17 @@
                             android:layout_height="167dp"
                             android:layout_marginRight="16dp"
                             android:gravity="bottom|center"
-                            android:background="@drawable/onemli_kisiler_background">
+                            android:background="@drawable/onemli_kisiler_item">
 
                             <TextView
                                 android:id="@+id/onemli_kisiler_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/onemli_kisiler"
                                 android:layout_marginBottom="16dp"
-                                android:textSize="15sp"
-                                android:fontFamily="@font/poppins_regular"
-                                android:textColor="@color/white"/>
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="@string/onemli_kisiler"
+                                android:textColor="@color/white"
+                                android:textSize="15sp" />
 
                         </RelativeLayout>
 
@@ -187,17 +189,17 @@
                             android:layout_height="167dp"
                             android:layout_marginLeft="16dp"
                             android:gravity="bottom|center"
-                            android:background="@drawable/diger_yerler_background">
+                            android:background="@drawable/diger_yerler_item">
 
                             <TextView
                                 android:id="@+id/diger_yerler_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/diger_yerler"
                                 android:layout_marginBottom="16dp"
-                                android:textSize="15sp"
-                                android:fontFamily="@font/poppins_regular"
-                                android:textColor="@color/white"/>
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="@string/diger_yerler"
+                                android:textColor="@color/white"
+                                android:textSize="15sp" />
 
                         </RelativeLayout>
 
@@ -208,61 +210,80 @@
                             android:layout_height="167dp"
                             android:layout_marginRight="16dp"
                             android:gravity="bottom|center"
-                            android:background="@drawable/diger_bilgiler_background">
+                            android:background="@drawable/diger_bilgiler">
 
                             <TextView
                                 android:id="@+id/diger_bilgiler_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/diger_bilgiler"
                                 android:layout_marginBottom="16dp"
-                                android:textSize="15sp"
-                                android:fontFamily="@font/poppins_regular"
-                                android:textColor="@color/white"/>
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="@string/diger_bilgiler"
+                                android:textColor="@color/white"
+                                android:textSize="15sp" />
 
                         </RelativeLayout>
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:id="@+id/kaydedilenler_item"
                             android:layout_width="167dp"
                             android:layout_height="167dp"
-                            android:layout_gravity="left"
                             android:layout_marginLeft="16dp"
-                            android:gravity="bottom|center"
-                            android:background="@drawable/kaydedilenler_background">
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:background="@drawable/ic_item_background">
+
+                            <ImageView
+                                android:id="@+id/kaydedilenler_image"
+                                android:layout_marginTop="24dp"
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:src="@drawable/ic_kaydedilenler_image"/>
 
                             <TextView
                                 android:id="@+id/kaydedilenler_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/kaydedilenler"
+                                android:layout_gravity="bottom|center"
+                                android:layout_marginTop="37dp"
                                 android:layout_marginBottom="16dp"
                                 android:textSize="15sp"
-                                android:fontFamily="@font/poppins_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:textColor="@color/white"/>
 
-                        </RelativeLayout>
+                        </LinearLayout>
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:id="@+id/hakkinda_item"
                             android:layout_width="167dp"
                             android:layout_height="167dp"
                             android:layout_gravity="right"
                             android:layout_marginRight="16dp"
-                            android:background="@drawable/hakkinda_background"
-                            android:gravity="bottom|center">
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:background="@drawable/ic_item_background">
+
+                            <ImageView
+                                android:id="@+id/hakkinda_image"
+                                android:layout_marginTop="24dp"
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:src="@drawable/hakkinda_logo"/>
 
                             <TextView
                                 android:id="@+id/hakkinda_item_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="16dp"
-                                android:fontFamily="@font/poppins_regular"
                                 android:text="@string/hakkinda"
-                                android:textColor="@color/white"
-                                android:textSize="15sp" />
+                                android:layout_gravity="bottom|center"
+                                android:layout_marginTop="37dp"
+                                android:layout_marginBottom="16dp"
+                                android:textSize="15sp"
+                                android:fontFamily="@font/poppins_medium"
+                                android:textColor="@color/white"/>
 
-                        </RelativeLayout>
+                        </LinearLayout>
 
                     </GridLayout>
 

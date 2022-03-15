@@ -1,5 +1,6 @@
 package com.agency11.sogutapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.Editable;
@@ -12,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agency11.sogutapp.adapter.ListAdapter;
+import com.agency11.sogutapp.model.Diger_Bilgiler;
+import com.agency11.sogutapp.model.Diger_Yerler;
+import com.agency11.sogutapp.model.Onemli_Kisiler;
 import com.agency11.sogutapp.model.Tarihi_Yerler;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -33,19 +37,142 @@ import java.util.Map;
 
 public class ReadData {
 
-    Context mContext;
+    Activity mContext;
     RecyclerView recyclerView;
     FirebaseFirestore firebaseFirestore;
     ListAdapter adapter;
     ShimmerFrameLayout shimmerFrameLayout;
 
-    public ReadData(Context mContext, RecyclerView recyclerView, FirebaseFirestore firebaseFirestore,
+    public ReadData(Activity mContext, RecyclerView recyclerView, FirebaseFirestore firebaseFirestore,
                     ShimmerFrameLayout shimmerFrameLayout,ListAdapter adapter){
         this.mContext = mContext;
         this.recyclerView = recyclerView;
         this.firebaseFirestore = firebaseFirestore;
         this.shimmerFrameLayout = shimmerFrameLayout;
         this.adapter = adapter;
+    }
+
+    public void diger_bilgiler(ArrayList<Diger_Bilgiler> diger_bilgilers){
+        firebaseFirestore.collection("digerbilgiler")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Diger_Bilgiler update = new Diger_Bilgiler(
+                                        document.getId(),
+                                        document.getData().get("exp").toString(),
+                                        document.getData().get("image").toString(),
+                                        document.getData().get("name").toString());
+
+
+                                diger_bilgilers.add(update);
+                            }
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext.getApplicationContext());
+                            linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                            recyclerView.setLayoutManager(linearLayoutManager);
+
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            adapter = new ListAdapter(mContext, null,null,null,diger_bilgilers, false);
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setHasFixedSize(true);
+                            adapter.notifyDataSetChanged();
+
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void onemli_kisiler(ArrayList<Onemli_Kisiler> onemli_kisilers){
+        firebaseFirestore.collection("onemlikisiler")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Onemli_Kisiler update = new Onemli_Kisiler(
+                                        document.getId(),
+                                        document.getData().get("children").toString(),
+                                        document.getData().get("exp").toString(),
+                                        document.getData().get("name").toString(),
+                                        document.getData().get("sibs").toString(),
+                                        document.getData().get("wife").toString(),
+                                        document.getData().get("mother").toString(),
+                                        document.getData().get("father").toString(),
+                                        document.getData().get("image").toString());
+
+
+                                onemli_kisilers.add(update);
+                            }
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext.getApplicationContext());
+                            linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                            recyclerView.setLayoutManager(linearLayoutManager);
+
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            adapter = new ListAdapter(mContext, null,onemli_kisilers,null,null, false);
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setHasFixedSize(true);
+                            adapter.notifyDataSetChanged();
+
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void diger_yerler(ArrayList<Diger_Yerler> diger_yerlers){
+        firebaseFirestore.collection("digeryerler")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Diger_Yerler update = new Diger_Yerler(
+                                        document.getId(),
+                                        document.getData().get("exp").toString(),
+                                        (ArrayList<String>) document.get("imageUrl"),
+                                        document.getGeoPoint("location_id"),
+                                         document.getData().get("name").toString(),
+                                        document.getData().get("phone").toString(),
+                                        (ArrayList<String>) document.get("times"),
+                                        document.getData().get("videoId").toString());
+
+
+                                diger_yerlers.add(update);
+                            }
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext.getApplicationContext());
+                            linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                            recyclerView.setLayoutManager(linearLayoutManager);
+
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            adapter = new ListAdapter(mContext, null,null,diger_yerlers,null, false);
+                            recyclerView.setAdapter(adapter);
+                            recyclerView.setHasFixedSize(true);
+                            adapter.notifyDataSetChanged();
+
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 
     public void tarihiYerler(ArrayList<Tarihi_Yerler> tarihi_yerlers) {
@@ -80,7 +207,7 @@ public class ReadData {
                             shimmerFrameLayout.stopShimmer();
                             shimmerFrameLayout.setVisibility(View.GONE);
                             recyclerView.setVisibility(View.VISIBLE);
-                            adapter = new ListAdapter(mContext, tarihi_yerlers, false);
+                            adapter = new ListAdapter(mContext, tarihi_yerlers,null,null,null, false);
                             recyclerView.setAdapter(adapter);
                             recyclerView.setHasFixedSize(true);
                             adapter.notifyDataSetChanged();
@@ -92,6 +219,7 @@ public class ReadData {
                 });
     }
 
+    /*
     public void getSearchTarihiYerler(ArrayList<Tarihi_Yerler> tarihi_yerlers){
 
         firebaseFirestore.collection("tarihiyerler").whereEqualTo("name", 1)
@@ -154,6 +282,8 @@ public class ReadData {
         adapter.notifyDataSetChanged();
     }
 
+     */
+
     public void kaydedilenTarihiYerler(ArrayList<Tarihi_Yerler> tarihi_yerlers) {
         SharedPreferences sharedPreferences2 = mContext.getSharedPreferences("id", Context.MODE_PRIVATE);
 
@@ -185,7 +315,7 @@ public class ReadData {
                     linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                     recyclerView.setLayoutManager(linearLayoutManager);
 
-                    adapter = new ListAdapter(mContext, tarihi_yerlers, false);
+                    adapter = new ListAdapter(mContext, tarihi_yerlers,null,null,null, false);
 
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();

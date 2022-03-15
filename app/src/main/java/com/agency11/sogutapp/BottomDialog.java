@@ -7,9 +7,13 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -41,6 +45,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -147,6 +152,10 @@ public class BottomDialog {
         size.setSize(forgot_password, 12);
         size.setHeight(login_layout,584);
 
+        image_close_square.setOnClickListener(view -> {
+            dialog.cancel();
+        });
+
         forgot_password.setOnClickListener(view1 -> {
             dialog.cancel();
             resetPasswordDialog();
@@ -171,19 +180,30 @@ public class BottomDialog {
                                 if (task.isSuccessful()) {
                                     firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-                                    if (page == 1) {
+                                    //if (page == 1) {
                                         activity.startActivity(new Intent(activity, MainActivity.class));
+                                        activity.finish();
+                                        activity.overridePendingTransition(0, 0);
+                                   // }
+
+                                    if (page == 2){
+                                        SharedPreferences sharedPreferences = activity.getSharedPreferences("profile", Context.MODE_PRIVATE);
+                                        String imageUriString = sharedPreferences.getString("profile_image", null);
+                                        if (imageUriString !=null){
+                                            Uri imageUri = Uri.parse(imageUriString);
+                                            try {
+                                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), imageUri);
+                                                profile_image.setImageBitmap(bitmap);
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        } else {
+                                            profile_image.setImageResource(R.drawable.profile);
+                                        }
+                                        kullanici_adi.setVisibility(View.VISIBLE);
+                                        //linearLayout.setBackgroundResource(R.drawable.background1);
                                     }
 
-                                    if (profile_image != null) {
-                                        profile_image.setImageResource(R.drawable.profile);
-                                    }
-                                    if (kullanici_adi != null) {
-                                        kullanici_adi.setVisibility(View.VISIBLE);
-                                    }
-                                    if (linearLayout != null) {
-                                        linearLayout.setBackgroundResource(R.drawable.background1);
-                                    }
                                     dialog.cancel();
 
                                 } else {
@@ -192,6 +212,7 @@ public class BottomDialog {
                             }
                         });
 
+                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 if (firebaseUser != null) {
                     DocumentReference reference = firebaseFirestore.collection("users").document(firebaseUser.getUid());
                     reference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -200,7 +221,7 @@ public class BottomDialog {
 
                             User user = documentSnapshot.toObject(User.class);
 
-                            if (kullanici_adi != null) {
+                            if (page == 2) {
                                 kullanici_adi.setText("Merhaba,\n" + user.getName());
                             }
                             Toast.makeText(activity, "Giriş yapıldı", Toast.LENGTH_SHORT).show();
@@ -274,6 +295,15 @@ public class BottomDialog {
         size.setMargin(login_text_remember, 8, 0, 0, 0);
         size.setSize(login_text_remember, 12);
         size.setHeight(reset_layout,641);
+
+        login_text_remember.setOnClickListener(view1 -> {
+            dialog.cancel();
+            loginDialog(0);
+        });
+
+        image_remember.setOnClickListener(view1 -> {
+            dialog.cancel();
+        });
 
         send.setOnClickListener(view1 -> {
             String txt_email = mail.getText().toString();
@@ -352,6 +382,9 @@ public class BottomDialog {
         size.setMargin(login_text, 8, 0, 0, 0);
         size.setSize(login_text, 12);
 
+        image_bottom_change.setOnClickListener(view1 -> {
+            dialog.cancel();
+        });
 
         send.setOnClickListener(view1 -> {
             String mail_text = mail.getText().toString();
@@ -485,6 +518,10 @@ public class BottomDialog {
         size.setHeight(login_button_image, 18);
         size.setMargin(login_button_image, 8, 0, 0, 0);
 
+        image_success.setOnClickListener(view1 -> {
+            dialog.cancel();
+        });
+
         login.setOnClickListener(view1 -> {
             loginDialog(0);
             dialog.dismiss();
@@ -578,6 +615,15 @@ public class BottomDialog {
         size.setSize(text_register4,12);
         size.setHeight(register_layout,641);
 
+        text_register4.setOnClickListener(view1 -> {
+            dialog.cancel();
+            loginDialog(0);
+        });
+
+        image_register.setOnClickListener(view1 -> {
+            dialog.cancel();
+        });
+
         register.setOnClickListener(view1 -> {
             String txt_email = mail.getText().toString();
             String txt_password = pass.getText().toString();
@@ -590,9 +636,9 @@ public class BottomDialog {
             } else if (txt_password.length() < 6) {
                 Toast.makeText(activity, "şifre en az 6 karakterden oluşmalıdır", Toast.LENGTH_SHORT).show();
             } else {
-                register(txt_email, txt_kullanici, txt_password);
-                Toast.makeText(activity, "Hesabınız Oluşturuldu", Toast.LENGTH_SHORT).show();
-                dialog.cancel();
+                register(txt_email, txt_kullanici, txt_password,dialog);
+                //Toast.makeText(activity, "Hesabınız Oluşturuldu", Toast.LENGTH_SHORT).show();
+               // dialog.cancel();
             }
         });
 
@@ -646,7 +692,7 @@ public class BottomDialog {
         dialog.getWindow().clearFlags(FLAG_DIM_BEHIND);
     }
 
-    private void register(final String email, String name, String password) {
+    private void register(final String email, String name, String password,Dialog dialog1) {
 
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -670,7 +716,7 @@ public class BottomDialog {
                                     kullanici_adi.setText("Merhaba,\n" + name);
                                     kullanici_adi.setVisibility(View.VISIBLE);
                                     linearLayout.setBackgroundResource(R.drawable.background1);
-                                    dialog.dismiss();
+                                    dialog1.dismiss();
                                 }
                             });
                         } else {

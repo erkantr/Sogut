@@ -39,7 +39,7 @@
     <string name="bir_hesabin_yok_mu">Bir hesabın yok mu?</string>
     <string name="kayit_ol">Kayıt ol</string>
     <string name="sifremi_unuttum">Şifremi unuttum</string>
-    <string name="eski_sifre_gecici">Eski Şifre (geçici)</string>
+    <string name="eski_sifre_gecici">Eski Şifre</string>
     <string name="sifre_tekrari">Şifre tekrarı</string>
     <string name="gonder">Gönder</string>
     <string name="bir_hesabin_var_mi">Bir hesabın var mı?</string>

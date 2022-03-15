@@ -3,38 +3,38 @@ package com.agency11.sogutapp.model;
 import java.util.ArrayList;
 
 public class Onemli_Kisiler {
-    String birth;
     String children;
-    String deathandtime;
     String exp;
-    String grandchild;
-    String graveLoc;
-    ArrayList<String> imageUrl;
     String name;
     String sibs;
+    String wife;
+    String mother;
+    String father;
+    String image;
+    private String id;
 
     public Onemli_Kisiler(){
 
     }
 
-    public Onemli_Kisiler(String birth, String children, String deathandtime, String exp, String grandchild, String graveLoc, ArrayList<String> imageUrl, String name, String sibs) {
-        this.birth = birth;
+    public Onemli_Kisiler(String id,String children, String exp, String name, String sibs, String wife, String mother, String father, String image) {
         this.children = children;
-        this.deathandtime = deathandtime;
         this.exp = exp;
-        this.grandchild = grandchild;
-        this.graveLoc = graveLoc;
-        this.imageUrl = imageUrl;
         this.name = name;
         this.sibs = sibs;
+        this.wife = wife;
+        this.mother = mother;
+        this.father = father;
+        this.image = image;
+        this.id = id;
     }
 
-    public String getBirth() {
-        return birth;
+    public String getId() {
+        return id;
     }
 
-    public void setBirth(String birth) {
-        this.birth = birth;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getChildren() {
@@ -45,44 +45,12 @@ public class Onemli_Kisiler {
         this.children = children;
     }
 
-    public String getDeathandtime() {
-        return deathandtime;
-    }
-
-    public void setDeathandtime(String deathandtime) {
-        this.deathandtime = deathandtime;
-    }
-
     public String getExp() {
         return exp;
     }
 
     public void setExp(String exp) {
         this.exp = exp;
-    }
-
-    public String getGrandchild() {
-        return grandchild;
-    }
-
-    public void setGrandchild(String grandchild) {
-        this.grandchild = grandchild;
-    }
-
-    public String getGraveLoc() {
-        return graveLoc;
-    }
-
-    public void setGraveLoc(String graveLoc) {
-        this.graveLoc = graveLoc;
-    }
-
-    public ArrayList<String> getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(ArrayList<String> imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public String getName() {
@@ -99,5 +67,37 @@ public class Onemli_Kisiler {
 
     public void setSibs(String sibs) {
         this.sibs = sibs;
+    }
+
+    public String getWife() {
+        return wife;
+    }
+
+    public void setWife(String wife) {
+        this.wife = wife;
+    }
+
+    public String getMother() {
+        return mother;
+    }
+
+    public void setMother(String mother) {
+        this.mother = mother;
+    }
+
+    public String getFather() {
+        return father;
+    }
+
+    public void setFather(String father) {
+        this.father = father;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

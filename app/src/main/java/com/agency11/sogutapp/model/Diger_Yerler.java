@@ -1,28 +1,40 @@
 package com.agency11.sogutapp.model;
 
+import com.google.firebase.firestore.GeoPoint;
+
 import java.util.ArrayList;
 
 public class Diger_Yerler {
     String exp;
     ArrayList<String> imageUrl;
-    ArrayList<String> location;
+    GeoPoint location_id;
     String name;
     String phone;
-    String time;
+    ArrayList<String> times;
     String videoId;
+    String id;
 
     public Diger_Yerler(){
 
     }
 
-    public Diger_Yerler(String exp, ArrayList<String> imageUrl, ArrayList<String> location, String name, String phone, String time, String videoId) {
+    public Diger_Yerler(String id,String exp, ArrayList<String> imageUrl, GeoPoint location_id, String name, String phone, ArrayList<String> times, String videoId) {
         this.exp = exp;
         this.imageUrl = imageUrl;
-        this.location = location;
+        this.location_id = location_id;
         this.name = name;
         this.phone = phone;
-        this.time = time;
+        this.times = times;
         this.videoId = videoId;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getExp() {
@@ -41,12 +53,12 @@ public class Diger_Yerler {
         this.imageUrl = imageUrl;
     }
 
-    public ArrayList<String> getLocation() {
-        return location;
+    public GeoPoint getLocation_id() {
+        return location_id;
     }
 
-    public void setLocation(ArrayList<String> location) {
-        this.location = location;
+    public void setLocation_id(GeoPoint location_id) {
+        this.location_id = location_id;
     }
 
     public String getName() {
@@ -65,12 +77,12 @@ public class Diger_Yerler {
         this.phone = phone;
     }
 
-    public String getTime() {
-        return time;
+    public ArrayList<String> getTimes() {
+        return times;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTimes(ArrayList<String> times) {
+        this.times = times;
     }
 
     public String getVideoId() {

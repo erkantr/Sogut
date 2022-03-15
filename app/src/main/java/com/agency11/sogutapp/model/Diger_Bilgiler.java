@@ -2,17 +2,19 @@ package com.agency11.sogutapp.model;
 
 public class Diger_Bilgiler {
     String exp;
-    String imageUrl;
+    String image;
     String name;
+    String id;
 
     public Diger_Bilgiler(){
 
     }
 
-    public Diger_Bilgiler(String exp, String imageUrl, String name) {
+    public Diger_Bilgiler(String id,String exp, String image, String name) {
         this.exp = exp;
-        this.imageUrl = imageUrl;
+        this.image = image;
         this.name = name;
+        this.id = id;
     }
 
     public String getExp() {
@@ -23,14 +25,21 @@ public class Diger_Bilgiler {
         this.exp = exp;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }

@@ -88,17 +88,19 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
+        //adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
         //readData = new ReadData(MainActivity.this, recyclerView, firebaseFirestore, shimmerFrameLayout, adapter);
         //readData.getSearchTarihiYerler(tarihi_yerlers);
 
         kullanici_adi = findViewById(R.id.kullanici_adi);
         RelativeLayout tarihi_yerler = findViewById(R.id.tarihi_yerler_item);
         RelativeLayout onemli_kisiler = findViewById(R.id.onemli_kisiler_item);
-        RelativeLayout kutsal_mekanlar = findViewById(R.id.diger_yerler_item);
+        RelativeLayout diger_yerler = findViewById(R.id.diger_yerler_item);
         RelativeLayout diger_bilgiler = findViewById(R.id.diger_bilgiler_item);
-        RelativeLayout kaydedilenler = findViewById(R.id.kaydedilenler_item);
-        RelativeLayout hakkimizda = findViewById(R.id.hakkinda_item);
+        LinearLayout kaydedilenler = findViewById(R.id.kaydedilenler_item);
+        LinearLayout hakkimizda = findViewById(R.id.hakkinda_item);
+        ImageView kaydedilenler_image = findViewById(R.id.kaydedilenler_image);
+        ImageView hakkinda_image = findViewById(R.id.hakkinda_image);
 
         linearLayout = findViewById(R.id.profile_background);
         profile_image = findViewById(R.id.profile_image);
@@ -129,6 +131,14 @@ public class MainActivity extends AppCompatActivity {
         //linearLayout.setBackgroundResource(R.drawable.background1);
 
 
+        size.setHeight(kaydedilenler_image,64);
+        size.setWidth(kaydedilenler_image,64);
+        size.setMargin(kaydedilenler_image,0,24,0,0);
+
+        size.setHeight(hakkinda_image,64);
+        size.setWidth(hakkinda_image,64);
+        size.setMargin(hakkinda_image,0,24,0,0);
+
         size.setHeight(linearLayout, 220);
         size.setHeight(profile_image, 54);
         size.setWidth(profile_image, 54);
@@ -157,9 +167,9 @@ public class MainActivity extends AppCompatActivity {
         size.setMargin(onemli_kisiler, 0, 0, 16, 0);
 
 
-        size.setWidth(kutsal_mekanlar, 167);
-        size.setHeight(kutsal_mekanlar, 167);
-        size.setMargin(kutsal_mekanlar, 16, 16, 0, 0);
+        size.setWidth(diger_yerler, 167);
+        size.setHeight(diger_yerler, 167);
+        size.setMargin(diger_yerler, 16, 16, 0, 0);
 
 
         size.setWidth(diger_bilgiler, 167);
@@ -173,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
         size.setWidth(hakkimizda, 167);
         size.setHeight(hakkimizda, 167);
         size.setMargin(hakkimizda, 0, 16, 16, 21);
+
+
 
         BottomDialog bottomDialog = new BottomDialog(this, firebaseUser, auth, firebaseFirestore, kullanici_adi,
                 profile_image, linearLayout);
@@ -199,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
             if (firebaseUser != null) {
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
             } else {
-                bottomDialog.loginDialog(0);
+                bottomDialog.loginDialog(2);
             }
         });
 
@@ -207,6 +219,24 @@ public class MainActivity extends AppCompatActivity {
         tarihi_yerler.setOnClickListener(view1 -> {
             Intent intent = new Intent(MainActivity.this, ListActivity.class);
             intent.putExtra("list", "tarihiyerler");
+            startActivity(intent);
+        });
+
+        onemli_kisiler.setOnClickListener(view1 -> {
+            Intent intent = new Intent(MainActivity.this, ListActivity.class);
+            intent.putExtra("list", "onemlikisiler");
+            startActivity(intent);
+        });
+
+        diger_bilgiler.setOnClickListener(view1 -> {
+            Intent intent = new Intent(MainActivity.this, ListActivity.class);
+            intent.putExtra("list", "digerbilgiler");
+            startActivity(intent);
+        });
+
+        diger_yerler.setOnClickListener(view1 -> {
+            Intent intent = new Intent(MainActivity.this, ListActivity.class);
+            intent.putExtra("list", "digeryerler");
             startActivity(intent);
         });
 
@@ -275,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if (editable.toString().isEmpty()){
-                    adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
+                   // adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
                     readData = new ReadData(MainActivity.this, recyclerView, firebaseFirestore, shimmerFrameLayout, adapter);
                     readData.tarihiYerler(tarihi_yerlers);
                 } else {
@@ -307,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
                             shimmerFrameLayout.stopShimmer();
                             shimmerFrameLayout.setVisibility(View.GONE);
                             recyclerView.setVisibility(View.VISIBLE);
-                            adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
+                            //adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
                             recyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                         }

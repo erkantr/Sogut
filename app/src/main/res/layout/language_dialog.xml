@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="343dp"
-    android:layout_height="323dp"
+    android:layout_height="273dp"
     android:elevation="15dp"
     android:id="@+id/main_card"
     android:layout_gravity="center|bottom"
@@ -70,12 +70,20 @@
                         android:background="@drawable/ic_tr" />
                 </androidx.cardview.widget.CardView>
 
-                <ImageView
-                    android:id="@+id/uk"
-                    android:layout_width="63dp"
-                    android:layout_height="63dp"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    app:cardCornerRadius="5dp"
+
                     android:layout_marginLeft="53dp"
-                    android:background="@drawable/uk" />
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/uk"
+                        android:layout_width="63dp"
+                        android:layout_height="63dp"
+                        android:background="@drawable/uk" />
+
+                </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/ua"

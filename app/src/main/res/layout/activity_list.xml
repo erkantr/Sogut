@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activity.ListActivity">
 
     <LinearLayout
@@ -24,7 +25,7 @@
                 android:background="#0000ffff"
                 android:src="@drawable/ic_coolicon" />
             <TextView
-                android:id="@+id/t_rbeler"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_marginTop="18dp"
                 android:layout_marginLeft="40dp"
