@@ -59,19 +59,7 @@ public class AdsActivity extends AppCompatActivity {
         // Load the InterstitialAd and set the adUnitId (defined in values/strings.xml).
         loadInterstitialAd();
 
-        // Create the next level button, which tries to show an interstitial when clicked.
-        mNextLevelButton = binding.nextLevelButton;
-        mNextLevelButton.setEnabled(false);
-        mNextLevelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showInterstitial();
-            }
-        });
-
-        // Create the text view to show the level number.
-        mLevelTextView = binding.level;
-        mLevel = START_LEVEL;
+        //showInterstitial();
 
         // Toasts the test ad message on the screen. Remove this after defining your own ad unit ID.
         Toast.makeText(this, TOAST_TEXT, Toast.LENGTH_LONG).show();
@@ -107,7 +95,6 @@ public class AdsActivity extends AppCompatActivity {
                         // The mInterstitialAd reference will be null until
                         // an ad is loaded.
                         mInterstitialAd = interstitialAd;
-                        mNextLevelButton.setEnabled(true);
 
                         Toast.makeText(AdsActivity.this, "onAdLoaded()", Toast.LENGTH_SHORT).show();
                         interstitialAd.setFullScreenContentCallback(
@@ -117,8 +104,8 @@ public class AdsActivity extends AppCompatActivity {
                                         // Called when fullscreen content is dismissed.
                                         // Make sure to set your reference to null so you don't
                                         // show it a second time.
-                                        mInterstitialAd = null;
                                         Log.d(TAG, "The ad was dismissed.");
+                                        finish();
                                     }
 
                                     @Override
@@ -126,8 +113,8 @@ public class AdsActivity extends AppCompatActivity {
                                         // Called when fullscreen content failed to show.
                                         // Make sure to set your reference to null so you don't
                                         // show it a second time.
-                                        mInterstitialAd = null;
                                         Log.d(TAG, "The ad failed to show.");
+                                        finish();
                                     }
 
                                     @Override
@@ -142,8 +129,6 @@ public class AdsActivity extends AppCompatActivity {
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         // Handle the error
                         Log.i(TAG, loadAdError.getMessage());
-                        mInterstitialAd = null;
-                        mNextLevelButton.setEnabled(true);
 
                         String error = String.format(
                                 Locale.ENGLISH,
@@ -155,8 +140,15 @@ public class AdsActivity extends AppCompatActivity {
                                 AdsActivity.this,
                                 "onAdFailedToLoad() with error: " + error, Toast.LENGTH_SHORT)
                                 .show();
+                        System.out.println("onAdFailedToLoad() with error: " + error);
+                        finish();
                     }
                 });
+        if (mInterstitialAd != null) {
+            mInterstitialAd.show(this);
+        } else {
+            Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void showInterstitial() {
@@ -165,7 +157,6 @@ public class AdsActivity extends AppCompatActivity {
             mInterstitialAd.show(this);
         } else {
             Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
-            goToNextLevel();
         }
     }
 

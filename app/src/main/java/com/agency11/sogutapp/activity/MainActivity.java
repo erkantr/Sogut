@@ -2,53 +2,49 @@ package com.agency11.sogutapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.TypedArray;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.MotionEvent;
+import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.agency11.sogutapp.BottomDialog;
+import com.agency11.sogutapp.method.BottomDialog;
+import com.agency11.sogutapp.method.LocaleHelper;
 import com.agency11.sogutapp.R;
-import com.agency11.sogutapp.ReadData;
-import com.agency11.sogutapp.Size;
+import com.agency11.sogutapp.method.ReadData;
+import com.agency11.sogutapp.method.Size;
 import com.agency11.sogutapp.adapter.ListAdapter;
 import com.agency11.sogutapp.model.Tarihi_Yerler;
 import com.agency11.sogutapp.model.User;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -70,7 +66,10 @@ public class MainActivity extends AppCompatActivity {
     int max = 7;
     int min = 0;
     int random = new Random().nextInt(max - min) + min;
+    AdRequest adRequest;
+    AdView adView;
 
+    InterstitialAd fullscreenAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
         shimmerFrameLayout = findViewById(R.id.shimmer);
         tarihi_yerlers = new ArrayList<>();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        adView = findViewById(R.id.adView);
+        MobileAds.initialize(this);
+        bannerAd();
+
 
         auth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -90,7 +93,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         //adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
         //readData = new ReadData(MainActivity.this, recyclerView, firebaseFirestore, shimmerFrameLayout, adapter);
+        readData = new ReadData(this, null, null, null, null);
+        adRequest = new AdRequest.Builder().build();
         //readData.getSearchTarihiYerler(tarihi_yerlers);
+        //readData.adTime(adRequest,this);
+
+        SharedPreferences sharedPreferences2 = getSharedPreferences("lang1", Context.MODE_PRIVATE);
+        String targetLanguage = sharedPreferences2.getString("language", "");
+        LocaleHelper.setLocale(this, targetLanguage);
 
         kullanici_adi = findViewById(R.id.kullanici_adi);
         RelativeLayout tarihi_yerler = findViewById(R.id.tarihi_yerler_item);
@@ -131,13 +141,13 @@ public class MainActivity extends AppCompatActivity {
         //linearLayout.setBackgroundResource(R.drawable.background1);
 
 
-        size.setHeight(kaydedilenler_image,64);
-        size.setWidth(kaydedilenler_image,64);
-        size.setMargin(kaydedilenler_image,0,24,0,0);
+        size.setHeight(kaydedilenler_image, 64);
+        size.setWidth(kaydedilenler_image, 64);
+        size.setMargin(kaydedilenler_image, 0, 24, 0, 0);
 
-        size.setHeight(hakkinda_image,64);
-        size.setWidth(hakkinda_image,64);
-        size.setMargin(hakkinda_image,0,24,0,0);
+        size.setHeight(hakkinda_image, 64);
+        size.setWidth(hakkinda_image, 64);
+        size.setMargin(hakkinda_image, 0, 24, 0, 0);
 
         size.setHeight(linearLayout, 220);
         size.setHeight(profile_image, 54);
@@ -178,12 +188,11 @@ public class MainActivity extends AppCompatActivity {
 
         size.setWidth(kaydedilenler, 167);
         size.setHeight(kaydedilenler, 167);
-        size.setMargin(kaydedilenler, 16, 16, 0, 21);
+        size.setMargin(kaydedilenler, 16, 16, 0, 80);
 
         size.setWidth(hakkimizda, 167);
         size.setHeight(hakkimizda, 167);
         size.setMargin(hakkimizda, 0, 16, 16, 21);
-
 
 
         BottomDialog bottomDialog = new BottomDialog(this, firebaseUser, auth, firebaseFirestore, kullanici_adi,
@@ -198,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     User user = documentSnapshot.toObject(User.class);
-                    kullanici_adi.setText("Merhaba,\n" + user.getName());
+                    kullanici_adi.setText(getResources().getString(R.string.merhaba) + user.getName());
                 }
             });
         } else {
@@ -208,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         profile_image.setOnClickListener(view -> {
+            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             if (firebaseUser != null) {
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
             } else {
@@ -219,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
         tarihi_yerler.setOnClickListener(view1 -> {
             Intent intent = new Intent(MainActivity.this, ListActivity.class);
             intent.putExtra("list", "tarihiyerler");
+            intent.putExtra("language", targetLanguage);
             startActivity(intent);
         });
 
@@ -250,9 +261,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AboutActivity.class);
             startActivity(intent);
         });
-
+/*
         EditText search = findViewById(R.id.search_view);
-
 
         RelativeLayout touchInterceptor = findViewById(R.id.relative_layout);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
@@ -272,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
 
         search.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -344,7 +355,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-                /*
                 if (editable.toString().isEmpty()){
                     adapter = new ListAdapter(MainActivity.this, tarihi_yerlers, false);
                     readData = new ReadData(MainActivity.this, recyclerView, firebaseFirestore, shimmerFrameLayout, adapter);
@@ -385,16 +395,15 @@ public class MainActivity extends AppCompatActivity {
                             });
                 }
 
-                 */
                 }
 
-            });
-        /*
+});
         search_view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
+
 
             @Override
             public boolean onQueryTextChange(String newText) {
@@ -406,13 +415,113 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-         */
 
-                                      }
-    /*
     public void Filtre(String a) {
         adapter.getFilter().filter(a);
     }
 
      */
+    }
+
+    void bannerAd(){
+        MobileAds.initialize(this);
+        /*
+        RequestConfiguration requestConfiguration = new RequestConfiguration.Builder()
+                .setTestDeviceIds(Arrays.asList("EAD98D52B6934D07B9DAD189F4BACB64")).build();
+        MobileAds.setRequestConfiguration(requestConfiguration);
+
+         */
+        adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                Log.d("BannerAdsExample", "onAdLoaded");
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+                Log.d("BannerAdsExample", "onAdClicked");
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+                Log.d("BannerAdsExample", "onAdClosed");
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                Log.d("BannerAdsExample", "onAdFailedToLoad");
+            }
+
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
+                Log.d("BannerAdsExample", "onAdImpression");
+            }
+
+            @Override
+            public void onAdImpression() {
+                super.onAdImpression();
+                Log.d("BannerAdsExample", "onAdOpened");
+            }
+        });
+
+    }
+
+    void intersititialAd(){
+        /*
+        RequestConfiguration requestConfiguration = new RequestConfiguration.Builder()
+                .setTestDeviceIds(Arrays.asList("EAD98D52B6934D07B9DAD189F4BACB64")).build();
+        MobileAds.setRequestConfiguration(requestConfiguration);
+
+         */
+        adRequest = new AdRequest.Builder().build();
+        MobileAds.initialize(this);
+        InterstitialAd.load(this,getString(R.string.interstitial_ad_unit_id), adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        fullscreenAdView = interstitialAd;
+                        //super.onAdLoaded(fullscreenAdView);
+
+                        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                super.onAdFailedToShowFullScreenContent(adError);
+                                Log.d("messages", "The ad failed to show.");
+                            }
+
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+                                super.onAdShowedFullScreenContent();
+                                Log.d("messages", "The ad was shown.");
+                            }
+
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                super.onAdDismissedFullScreenContent();
+                                Log.d("messages", "The ad was dismissed.");
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        super.onAdFailedToLoad(loadAdError);
+                        Toast.makeText(MainActivity.this, "a"+ loadAdError, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    protected void onResume() {
+        readData.adTime(adRequest,this);
+        super.onResume();
+    }
 }

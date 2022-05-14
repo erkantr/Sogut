@@ -2,6 +2,7 @@ package com.agency11.sogutapp.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.agency11.sogutapp.BottomDialog;
+import com.agency11.sogutapp.method.BottomDialog;
+import com.agency11.sogutapp.method.LocaleHelper;
 import com.agency11.sogutapp.R;
+import com.agency11.sogutapp.method.ReadData;
 import com.agency11.sogutapp.model.User;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,8 +34,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Random;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -45,6 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView profile_image;
     SharedPreferences sharedPreferences;
     FirebaseAuth auth;
+    ReadData readData;
+    AdRequest adRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         sharedPreferences = getSharedPreferences("profile", Context.MODE_PRIVATE);
         String imageUriString = sharedPreferences.getString("profile_image", null);
+        readData = new ReadData(this,null,null,null,null);
 
         ImageView logout = findViewById(R.id.logout);
         ImageView langugageDialog = findViewById(R.id.more2);
@@ -65,6 +70,10 @@ public class ProfileActivity extends AppCompatActivity {
         BottomDialog bottomDialog = new BottomDialog(this,null,auth,null
         ,null,null,null);
 
+        SharedPreferences sharedPreferences2 = getSharedPreferences("lang1", Context.MODE_PRIVATE);
+        String targetLanguage = sharedPreferences2.getString("language","");
+        LocaleHelper.setLocale(this,targetLanguage);
+
         //linearLayout.setBackgroundResource(R.drawable.background1);
         DocumentReference reference = firebaseFirestore.collection("users").document(firebaseUser.getUid());
         reference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -73,6 +82,13 @@ public class ProfileActivity extends AppCompatActivity {
                 User user = documentSnapshot.toObject(User.class);
                 kullanici_adi.setText(user.getName());
             }
+        });
+
+        LinearLayout back = findViewById(R.id.back_layout);
+
+        back.setOnClickListener(view -> {
+            NavUtils.navigateUpFromSameTask(ProfileActivity.this);
+
         });
 
         /*
@@ -169,5 +185,10 @@ public class ProfileActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    protected void onResume() {
+        readData.adTime(adRequest,this);
+        super.onResume();
     }
 }

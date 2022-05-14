@@ -14,8 +14,13 @@
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme2" >
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDib9LERPzu_gBtR9staLTqjMM8yWBAWo4" />
 
         <!--
              You can find your app ID in the AdMob UI. For android:value,
@@ -24,56 +29,41 @@
         -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-5878973970188801~8749275832" />
 
         <activity
             android:name=".activity.AdsActivity"
             android:exported="false"
-            android:label="@string/title_activity_ads" />
-        <!-- Include the AdActivity configChanges and theme. -->
+            android:label="@string/title_activity_ads" /> <!-- Include the AdActivity configChanges and theme. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="false"
             android:theme="@android:style/Theme.Translucent" />
-        <!--
-             You can find your app ID in the AdMob UI. For android:value,
-            insert your own AdMob app ID in quotes, as shown below.
-            Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713
-        -->
-        <!-- Include the AdActivity configChanges and theme. -->
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
-
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDib9LERPzu_gBtR9staLTqjMM8yWBAWo4" />
-
         <activity
             android:name=".map.MapsActivity"
             android:exported="false"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AboutActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.OnboardingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SplashScreen"
             android:exported="true"
-            android:theme="@style/Theme.Sogut">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Sogut" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -82,13 +72,18 @@
         </activity>
         <activity
             android:name=".activity.ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activity.ListActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
     </application>
 

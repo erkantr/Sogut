@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sogut</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="metin1">Все права защищены.\nВ случае несанкционированного использования любой фотографии или информации считается, что вы приняли денежное пособие.</string>
+    <string name="tarihini_ogren">Узнай свое прошлое</string>
+    <string name="metin2">Посетите исторических личностей в городе и узнайте исторические факты!</string>
+    <string name="geri">назад</string>
+    <string name="merhaba">Привет,\n</string>
+    <string name="ilerle">следующий</string>
+    <string name="sogut_rehber_uygulamasi">Приложение Sogut Guide</string>
+    <string name="tarihi_yerler">Исторические достопримечательности</string>
+    <string name="onemli_kisiler">Важные люди</string>
+    <string name="diger_yerler">Другие места</string>
+    <string name="diger_bilgiler">Дополнительная информация</string>
+    <string name="kaydedilenler">Сохранено</string>
+    <string name="hakkinda">O</string>
+    <string name="merhaba_dunyali">Здравствуй, \nЗемлянин</string>
+    <string name="iletisim_adresleri">Контакт</string>
+    <string name="her_zaman_acik">Всегда открыты</string>
+    <string name="adres">Адрес:</string>
+    <string name="acik_oldugu_saatler">Часы работы:</string>
+    <string name="her_zaman">Всегда</string>
+    <string name="tamamini_gor">Увидеть все</string>
+    <string name="aciklama">Описание</string>
+    <string name="gitmek_istiyorum">я хотел бы посетить</string>
+    <string name="profil">Профиль</string>
+    <string name="sifre_ayarlari">Настройки пароля</string>
+    <string name="sifremi_degistir">Изменить свой пароль</string>
+    <string name="dil_ayarlari">Языковые настройки</string>
+    <string name="dil_degistir">изменение языка</string>
+    <string name="hesap_ayarlari">Настройки учетной записи</string>
+    <string name="devam_etmek_icin">Продолжить</string>
+    <string name="giris_yap">Авторизоваться</string>
+    <string name="e_mail_adresi">Адрес электронной почты</string>
+    <string name="sifre">Пароль</string>
+    <string name="ya_da">Или</string>
+    <string name="bir_hesabin_yok_mu">У вас нет аккаунта?</string>
+    <string name="kayit_ol">регистр</string>
+    <string name="sifremi_unuttum">Забыл мой пароль</string>
+    <string name="eski_sifre_gecici">Старый пароль</string>
+    <string name="sifre_tekrari">Подтвердите новый пароль</string>
+    <string name="gonder">Представлять на рассмотрение</string>
+    <string name="bir_hesabin_var_mi">У тебя есть аккаунт</string>
+    <string name="kullanici_adi">Имя пользователя</string>
+    <string name="sifre_degistirme_basarili">Изменить пароль \nУспешно</string>
+    <string name="title_activity_ads">Рекламная активность</string>
+    <string name="action_settings">Аярлар</string>
+    <string name="acik_olma_saatleri">Часы работы</string>
+    <string name="dil_sec">Выбрать язык</string>
+    <string name="interstitial_ad_sample">Образец межстраничного объявления</string>
+    <string name="start_level">1-й уровень</string>
+    <string name="next_level">Следующий уровень</string>
+    <string name="su_an_acik">Открой сейчас</string>
+    <string name="kardesleri">братья и сестры</string>
+    <string name="cocuklari">дети</string>
+
+    <string name="interstitial_ad_unit_id">ca-app-pub-5878973970188801/5356825732
+</string>
+    <string name="proje_yoneticisi">Менеджер проекта - Дизайнер интерфейсов</string>
+    <string name="mobil_uygulama_gelistiricisi">Разработчик мобильных приложений</string>
+    <string name="web_developer">Веб-разработчик</string>
+    <string name="proje_fikir_sahibi">Владелец идеи проекта - специалист по контенту и переводу</string>
+</resources>

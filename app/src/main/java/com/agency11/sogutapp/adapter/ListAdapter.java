@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.agency11.sogutapp.R;
 import com.agency11.sogutapp.activity.DetailActivity;
+import com.agency11.sogutapp.method.Translator;
 import com.agency11.sogutapp.model.Diger_Bilgiler;
 import com.agency11.sogutapp.model.Diger_Yerler;
 import com.agency11.sogutapp.model.Onemli_Kisiler;
@@ -25,10 +27,15 @@ import com.agency11.sogutapp.model.Tarihi_Yerler;
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.google.firebase.firestore.GeoPoint;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +54,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     ShimmerFrameLayout shimmerFrameLayout;
     FirestoreRecyclerOptions<Tarihi_Yerler> tarihi_yerlerFirestoreRecyclerOptions;
 
+    private int type_ad = 0;
+    private int type_list = 1;
 
     public ListAdapter(Activity mContext, ArrayList<Tarihi_Yerler> yerler,ArrayList<Onemli_Kisiler> onemli_kisilers
             ,ArrayList<Diger_Yerler> diger_yerlers,ArrayList<Diger_Bilgiler> diger_bilgilers,boolean time){
@@ -62,6 +71,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @NonNull
     @Override
     public ListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view= LayoutInflater.from(mContext).inflate(R.layout.item,parent,false);
 
         Intent intent1 = mContext.getIntent();
@@ -97,14 +107,32 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return size;
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull  ListAdapter.ViewHolder holder, int position) {
 
+        /*
+        RequestConfiguration requestConfiguration = new RequestConfiguration.Builder()
+                .setTestDeviceIds(Arrays.asList("EAD98D52B6934D07B9DAD189F4BACB64")).build();
+        MobileAds.setRequestConfiguration(requestConfiguration);
+
+         */
+
+        Translator translator = new Translator();
+
         switch (list) {
             case "kaydedilenler":
-                holder.time.setVisibility(View.VISIBLE);
+                holder.linearLayout.setVisibility(View.GONE);
+                holder.adView.setVisibility(View.VISIBLE);
                 Tarihi_Yerler tarihi_yerler = yerler.get(position);
+                if (tarihi_yerler == null){
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    if (holder.adView != null){
+                        holder.adView.loadAd(adRequest);
+                    }
+                } else {
+                    holder.linearLayout.setVisibility(View.VISIBLE);
+                    holder.adView.setVisibility(View.GONE);
+                holder.time.setVisibility(View.VISIBLE);
                 holder.baslik.setText(yerler.get(position).getName());
 
                 ArrayList<String> times = tarihi_yerler.getTimes();
@@ -116,7 +144,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
                 Date d = new Date();
                 String dayOfTheWeek = sdf.format(d);
-                System.out.println(dayOfTheWeek);
 
 
                 for (int i = 0; i < times.size(); i++) {
@@ -152,10 +179,23 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     intent.putExtra("list",list);
                     mContext.startActivity(intent);
                 });
+
+                }
                 break;
             case "onemlikisiler":
-                holder.time.setVisibility(View.GONE);
                 Onemli_Kisiler onemli_kisiler = onemli_kisilers.get(position);
+                holder.linearLayout.setVisibility(View.GONE);
+                holder.adView.setVisibility(View.VISIBLE);
+                if (onemli_kisiler == null){
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    if (holder.adView != null){
+                        holder.adView.loadAd(adRequest);
+                    }
+                } else {
+                    holder.linearLayout.setVisibility(View.VISIBLE);
+                    holder.adView.setVisibility(View.GONE);
+                holder.time.setVisibility(View.GONE);
+
                 holder.baslik.setText(onemli_kisilers.get(position).getName());
 
                 if (onemli_kisiler.getExp().length() > 47) {
@@ -176,11 +216,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     intent.putExtra("list",list);
                     mContext.startActivity(intent);
                 });
-
+                }
                 break;
             case "tarihiyerler":
-                holder.time.setVisibility(View.VISIBLE);
+                holder.linearLayout.setVisibility(View.GONE);
+                holder.adView.setVisibility(View.VISIBLE);
                 Tarihi_Yerler tarihi_yerler1 = yerler.get(position);
+                if (tarihi_yerler1 == null){
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    if (holder.adView != null){
+                        holder.adView.loadAd(adRequest);
+                    }
+                } else {
+                    holder.linearLayout.setVisibility(View.VISIBLE);
+                    holder.adView.setVisibility(View.GONE);
+                holder.time.setVisibility(View.VISIBLE);
                 holder.baslik.setText(yerler.get(position).getName());
 
                 ArrayList<String> times1 = tarihi_yerler1.getTimes();
@@ -192,7 +242,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 String currentTime1 = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
                 Date d1 = new Date();
                 String dayOfTheWeek1 = sdf1.format(d1);
-                System.out.println(dayOfTheWeek1);
 
 
                 for (int i = 0; i < times1.size(); i++) {
@@ -228,10 +277,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     intent.putExtra("list",list);
                     mContext.startActivity(intent);
                 });
+                }
                 break;
             case "digeryerler":
-                holder.time.setVisibility(View.VISIBLE);
+                holder.linearLayout.setVisibility(View.GONE);
+                holder.adView.setVisibility(View.VISIBLE);
                 Diger_Yerler diger_yerler = diger_yerlers.get(position);
+                if (diger_yerler == null){
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    if (holder.adView != null){
+                        holder.adView.loadAd(adRequest);
+                    }
+                } else {
+                    holder.linearLayout.setVisibility(View.VISIBLE);
+                    holder.adView.setVisibility(View.GONE);
+                holder.time.setVisibility(View.VISIBLE);
                 holder.baslik.setText(diger_yerlers.get(position).getName());
 
                 ArrayList<String> times4 = diger_yerler.getTimes();
@@ -242,7 +302,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 SimpleDateFormat sdf4 = new SimpleDateFormat("EEEE");
                 Date d4 = new Date();
                 String dayOfTheWeek4 = sdf4.format(d4);
-                System.out.println(dayOfTheWeek4);
 
 
                 for (int i = 0; i < times4.size(); i++) {
@@ -278,39 +337,51 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     intent.putStringArrayListExtra("times", diger_yerler.getTimes());
                     mContext.startActivity(intent);
                 });
-                    break;
-                    case "digerbilgiler":
-                        holder.time.setVisibility(View.GONE);
-                        Diger_Bilgiler digerBilgiler = diger_bilgilers.get(position);
-                        holder.baslik.setText(diger_bilgilers.get(position).getName());
-
-                        if (digerBilgiler.getExp().length() > 47) {
-                            holder.aciklama.setText(digerBilgiler.getExp().substring(0, 47) + "...");
-                        } else {
-                            holder.aciklama.setText(digerBilgiler.getExp() + "...");
-                        }
-
-                        Glide.with(mContext).load(digerBilgiler.getImage()).into(holder.image);
-
-                        holder.itemView.setOnClickListener(view -> {
-                            Intent intent = new Intent(mContext, DetailActivity.class);
-                            intent.putExtra("image",digerBilgiler.getImage());
-                            intent.putExtra("exp",digerBilgiler.getExp());
-                            intent.putExtra("name",digerBilgiler.getName());
-                            intent.putExtra("id",digerBilgiler.getId());
-                            intent.putExtra("list",list);
-                            mContext.startActivity(intent);
-                        });
-
-                        break;
                 }
+                break;
+            case "digerbilgiler":
+                holder.linearLayout.setVisibility(View.GONE);
+                holder.adView.setVisibility(View.VISIBLE);
+                Diger_Bilgiler digerBilgiler = diger_bilgilers.get(position);
+                if (digerBilgiler == null){
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    if (holder.adView != null){
+                        holder.adView.loadAd(adRequest);
+                    }
+                } else {
+                    holder.linearLayout.setVisibility(View.VISIBLE);
+                    holder.adView.setVisibility(View.GONE);
+                    holder.time.setVisibility(View.GONE);
+                    holder.baslik.setText(diger_bilgilers.get(position).getName());
+
+                    if (digerBilgiler.getExp().length() > 47) {
+                        holder.aciklama.setText(digerBilgiler.getExp().substring(0, 47) + "...");
+                    } else {
+                        holder.aciklama.setText(digerBilgiler.getExp() + "...");
+                    }
+
+                    Glide.with(mContext).load(digerBilgiler.getImage()).into(holder.image);
+
+                    holder.itemView.setOnClickListener(view -> {
+                        Intent intent = new Intent(mContext, DetailActivity.class);
+                        intent.putExtra("image", digerBilgiler.getImage());
+                        intent.putExtra("exp", digerBilgiler.getExp());
+                        intent.putExtra("name", digerBilgiler.getName());
+                        intent.putExtra("id", digerBilgiler.getId());
+                        intent.putExtra("list", list);
+                        mContext.startActivity(intent);
+                    });
+                }
+                break;
+        }
+        translator.translate(holder.baslik,holder.baslik.getText().toString(),null);
+        translator.translateDetails(holder.aciklama,holder.aciklama.getText().toString(),null);
     }
     /*
     @Override
     public Filter getFilter() {
         return filter;
     }
-
      */
 
 
@@ -319,12 +390,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     protected void onBindViewHolder(@NonNull ListAdapter.ViewHolder holder, int position, @NonNull Tarihi_Yerler model) {
         final Tarihi_Yerler tarihi_yerler = yerler.get(position);
         holder.baslik.setText(tarihi_yerler.getName());
-
         holder.itemView.setOnClickListener(view -> {
             Toast.makeText(mContext, tarihi_yerler.getName(), Toast.LENGTH_SHORT).show();
         });
     }
-
      */
 
     /*
@@ -332,7 +401,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
             List<Tarihi_Yerler> filteredList = new ArrayList<>();
-
             if (charSequence.toString().isEmpty()) {
                 filteredList.addAll(searchList);
             } else {
@@ -342,13 +410,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     }
                 }
             }
-
             FilterResults filterResults = new FilterResults();
             filterResults.values = filteredList;
-
             return filterResults;
         }
-
         @SuppressLint("NotifyDataSetChanged")
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
@@ -357,7 +422,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             notifyDataSetChanged();
         }
     };
-
      */
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -366,6 +430,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         ImageView image;
         ImageView time;
         TextView aciklama;
+        LinearLayout linearLayout;
+        AdView adView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -374,6 +440,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             image = itemView.findViewById(R.id.image);
             time = itemView.findViewById(R.id.time);
             aciklama = itemView.findViewById(R.id.aciklama);
+            adView = itemView.findViewById(R.id.adView);
+            linearLayout = itemView.findViewById(R.id.cardview);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.agency11.sogutapp;
+package com.agency11.sogutapp.method;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
@@ -31,8 +31,12 @@ public class Size {
         view.setPadding(calcWidth(left),calcWidth(top),calcWidth(right),calcWidth(bottom));
     }
 
+    public void setPaddingHeight(View view, int left,int top,int right,int bottom){
+        view.setPadding(calcHeight(left),calcHeight(top),calcHeight(right),calcHeight(bottom));
+    }
+
     public void setPadding2(View view, int left,int top,int right,int bottom){
-        view.setPadding(calcSize(left),calcSize(top),calcSize(right),calcSize(bottom));
+        view.setPadding(calcHeight(left),calcHeight(top),calcHeight(right),calcHeight(bottom));
     }
 
     public void setMargin2(View view, int left, int top, int right, int bottom){
@@ -45,8 +49,12 @@ public class Size {
         view.getLayoutParams().width = calcWidth(width);
     }
 
-    public void setHeight(View view,int height){
+    public void setHeight(View view, int height){
         view.getLayoutParams().height = calcWidth(height);
+    }
+
+    public void setRealHeight(View view, int height){
+        view.getLayoutParams().height = calcHeight(height);
     }
 
     public void setMargin(View view, int left, int top, int right, int bottom){
@@ -56,7 +64,7 @@ public class Size {
     }
 
     int calcHeight(float value){
-        return (int) ((dpWidth *(value/designHeight)) );
+        return (int) (dpHeight *(value/designHeight) );
     }
 
     int calcWidth(float value){
@@ -64,7 +72,11 @@ public class Size {
     }
 
     int calcSize(float value){
-        return (int) ((dpWidth *(value/designWidth) / density1));
+        return (int)  ((dpWidth *(value/designWidth) / density1)) ;
+    }
+
+    int calcSize2(float value){
+        return (int)  ((dpHeight *(value/designHeight) / density1)) ;
     }
 
 }

@@ -9,7 +9,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="top"
         android:layout_above="@+id/bottom"
         android:orientation="vertical">
 
@@ -22,7 +23,12 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
 
-                <ImageView
+                <LinearLayout
+                    android:id="@+id/back_layout"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent">
+
+                <ImageButton
                     android:id="@+id/toplanti"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="19.52dp"
@@ -30,6 +36,8 @@
                     android:layout_height="wrap_content"
                     android:background="#0000ffff"
                     android:src="@drawable/ic_coolicon" />
+
+                </LinearLayout>
                 <TextView
                     android:id="@+id/page_title"
                     android:layout_width="wrap_content"
@@ -77,7 +85,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <HorizontalScrollView
@@ -97,7 +105,7 @@
                             android:id="@+id/youtube_player_view"
                             android:layout_width="370dp"
                             android:layout_height="214dp"
-                            android:focusableInTouchMode="false" />
+                            />
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_image0"
@@ -378,6 +386,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_marginTop="4dp"
+                        android:layout_marginRight="5dp"
                         android:fontFamily="@font/poppins_regular"
                         android:text="Orta, Dellal Sk. No:5, 11600 Söğüt/Bilecik"
                         android:textColor="#353535"
@@ -420,6 +429,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tamamini_gor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -430,6 +440,7 @@
                         android:textSize="10sp" />
 
                     <ImageView
+                        android:id="@+id/tamamini_gor_icon"
                         android:layout_width="7dp"
                         android:layout_height="12dp"
                         android:layout_marginLeft="8dp"
@@ -446,7 +457,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Kardeşleri"
+                    android:text="@string/kardesleri"
                     android:textColor="#353535" />
 
             <LinearLayout
@@ -460,7 +471,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/ic_location" />
+                    android:background="@drawable/ic_children" />
 
                 <TextView
                     android:id="@+id/sibs_text"
@@ -482,7 +493,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Çocukları"
+                    android:text="@string/cocuklari"
                     android:textColor="#353535" />
 
                 <LinearLayout
@@ -496,7 +507,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/ic_location" />
+                        android:background="@drawable/ic_sibs" />
 
                     <TextView
                         android:id="@+id/children_text"

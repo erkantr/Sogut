@@ -18,6 +18,11 @@
             android:gravity="left"
             android:orientation="horizontal">
 
+            <LinearLayout
+                android:id="@+id/back_layout"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/toplanti"
                 android:layout_width="wrap_content"
@@ -27,11 +32,13 @@
                 android:background="#0000ffff"
                 android:src="@drawable/ic_coolicon" />
 
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/t_rbeler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="18dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/profil"

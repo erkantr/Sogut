@@ -20,18 +20,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.agency11.sogutapp.BottomDialog;
+import com.agency11.sogutapp.method.BottomDialog;
+import com.agency11.sogutapp.method.LocaleHelper;
+import com.agency11.sogutapp.method.ReadData;
+import com.agency11.sogutapp.method.Size;
 import com.agency11.sogutapp.map.MapsActivity;
 import com.agency11.sogutapp.R;
-import com.agency11.sogutapp.Translator;
+import com.agency11.sogutapp.method.Translator;
 import com.agency11.sogutapp.adapter.ImageListAdapter;
 import com.agency11.sogutapp.adapter.VideoAdapter;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerTracker;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.text.SimpleDateFormat;
@@ -51,6 +56,8 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
     FirebaseAuth auth;
     VideoAdapter videoAdapter;
     String id;
+    AdRequest adRequest;
+    ReadData readData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,9 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         auth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        readData = new ReadData(this,null,null,null,null);
+        adRequest = new AdRequest.Builder().build();
+        //readData.adTime(adRequest,this);
 
         RelativeLayout kaydet = findViewById(R.id.kaydet_button);
         ImageView kaydet_image = findViewById(R.id.kaydet_button_image);
@@ -67,6 +77,7 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
 
         RelativeLayout map_button = findViewById(R.id.map_button);
         YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
+        com.google.android.youtube.player.YouTubePlayer.OnInitializedListener onInitializedListener;
         Button time_button = findViewById(R.id.time_button);
         TextView konum = findViewById(R.id.konum);
         RelativeLayout call = findViewById(R.id.call_button);
@@ -85,14 +96,28 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
         LinearLayout children_layout = findViewById(R.id.children_layout);
         TextView children_title_text = findViewById(R.id.children_title_text);
         TextView children_text = findViewById(R.id.children_text);
-
+        ImageView tamamini_gor_icon = findViewById(R.id.tamamini_gor_icon);
+        TextView tamamini_gor = findViewById(R.id.tamamini_gor);
 
         Translator translator = new Translator();
         sharedPreferences = getSharedPreferences("id", Context.MODE_PRIVATE);
-        String targetLanguage = Locale.getDefault().getLanguage();
-
+        SharedPreferences sharedPreferences2 = getSharedPreferences("lang1", Context.MODE_PRIVATE);
+        String targetLanguage = sharedPreferences2.getString("language","");
+        LocaleHelper.setLocale(this,targetLanguage);
+        //String targetLanguage = Locale.getDefault().getLanguage();
         Intent intent = getIntent();
         String list = intent.getStringExtra("list");
+
+        LinearLayout back = findViewById(R.id.back_layout);
+
+
+        back.setOnClickListener(view -> {
+            Intent intent1 = new Intent(DetailActivity.this,ListActivity.class);
+            intent1.putExtra("list",list);
+            startActivity(intent1);
+
+        });
+
         switch (list) {
             case "kaydedilenler":
                 sibs_title_text.setVisibility(View.GONE);
@@ -110,33 +135,32 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
 
                 new_id = sharedPreferences.getString(id, "");
 
-                translator.translate(baslik,name,targetLanguage);
-                translator.translate(detay_text,detay,targetLanguage);
+                translator.translate(baslik, name,null);
+                translator.translate(detay_text, detay,null);
 
                 SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
                 String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
                 Date d = new Date();
                 String dayOfTheWeek = sdf.format(d);
 
-
                 konum.setText(location.get(0));
 
-                for (int i=0; i < times.size(); i++){
+                for (int i = 0; i < times.size(); i++) {
                     String time = times.get(i).toLowerCase();
-                    if (time.matches("her zaman açık")){
+                    if (time.matches("her zaman açık")) {
                         //holder.time.setBackgroundResource(R.drawable.ic_ellipse_1);
                         time_button.setBackgroundResource(R.drawable.time_background);
                         time_button.setTextColor(getResources().getColor(R.color.primary_green));
-                        time_button.setText("Her zaman açık");
+                        time_button.setText(getResources().getString(R.string.her_zaman_acik));
 
-                    } else if (time.matches("kapalı") && time.matches(dayOfTheWeek)){
+                    } else if (time.matches("kapalı") && time.matches(dayOfTheWeek)) {
                         time_button.setBackgroundResource(R.drawable.clan);
                         time_button.setTextColor(getResources().getColor(R.color.yellow_variant));
                         time_button.setText("Kapalı");
-                    }  else {
+                    } else {
                         time_button.setBackgroundResource(R.drawable.time_background);
                         time_button.setTextColor(getResources().getColor(R.color.primary_green));
-                        time_button.setText("Şu an açık");
+                        time_button.setText(getResources().getString(R.string.su_an_acik));
                     }
                 }
 
@@ -144,31 +168,45 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                     if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         Intent map_intent = new Intent(DetailActivity.this, MapsActivity.class);
                         map_intent.putExtra("name", name);
+                        map_intent.putExtra("list",list);
                         startActivity(map_intent);
                     } else {
                         ActivityCompat.requestPermissions(DetailActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
                         Toast.makeText(this, "Konum izni gerekli", Toast.LENGTH_SHORT).show();
                     }
+                    readData.adTime(adRequest,this);
                 });
 
-                getLifecycle().addObserver(youTubePlayerView);
-                youTubePlayerView.addYouTubePlayerListener(new  AbstractYouTubePlayerListener(){
-                    @Override
-                    public  void  onReady ( @NonNull YouTubePlayer youTubePlayer ) {
+
+
+                if (!videoId.equals("")){
 
 
 
-                        youTubePlayer.loadVideo(videoId, 0 );
-                    }
-                });
+                    youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                        @Override
+                        public void onReady(@NonNull YouTubePlayer youTubePlayer) {
 
-                int[] cards = new int[] {R.id.card_image0, R.id.card_image1,R.id.card_image2,R.id.card_image3,R.id.card_image4,R.id.card_image5,
-                        R.id.card_image6,R.id.card_image7,R.id.card_image8,R.id.card_image9,R.id.card_image10};
 
-                int[] imageId= new int[] {R.id.imageview0,R.id.imageview1,R.id.imageview2,R.id.imageview3,R.id.imageview4
-                        ,R.id.imageview5,R.id.imageview6,R.id.imageview7,R.id.imageview8,R.id.imageview9,R.id.imageview10};
+                            youTubePlayer.loadVideo(videoId, 0);
+                        }
+                    });
 
-                for (int i=0; i<images.size(); i++){
+                } else {
+                    youTubePlayerView.setVisibility(View.GONE);
+                }
+
+
+
+
+
+                int[] cards = new int[]{R.id.card_image0, R.id.card_image1, R.id.card_image2, R.id.card_image3, R.id.card_image4, R.id.card_image5,
+                        R.id.card_image6, R.id.card_image7, R.id.card_image8, R.id.card_image9, R.id.card_image10};
+
+                int[] imageId = new int[]{R.id.imageview0, R.id.imageview1, R.id.imageview2, R.id.imageview3, R.id.imageview4
+                        , R.id.imageview5, R.id.imageview6, R.id.imageview7, R.id.imageview8, R.id.imageview9, R.id.imageview10};
+
+                for (int i = 0; i < images.size(); i++) {
                     CardView cardView = findViewById(cards[i]);
                     cardView.setVisibility(View.VISIBLE);
                     System.out.println(i);
@@ -177,25 +215,24 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                     Glide.with(this).load(images.get(i)).into(imageView);
 
                     call.setOnClickListener(view -> {
+                        readData.adTime(adRequest,this);
                         Uri uri = Uri.parse("tel:" + numara);
                         Intent call_intent = new Intent(Intent.ACTION_DIAL, uri);
                         startActivity(call_intent);
+                        readData.adTime(adRequest,this);
                     });
 
 
                 }
 
-                if(firebaseUser != null){
+                final BottomDialog bottomDialog = new BottomDialog(this, firebaseUser, auth,
+                        firebaseFirestore, null, null, null);
+
+                if (firebaseUser != null) {
 
                     kaydet.setOnClickListener(view -> {
-            /*
-            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-            SharedPreferences.Editor editor2 = sharedPreferences.edit();
-            editor2.putString(id + "=date", currentDate);
-            editor2.apply();
 
-             */
-                        String new_id2 = sharedPreferences.getString(id,"");
+                        String new_id2 = sharedPreferences.getString(id, "");
                         if (new_id2 != null && new_id2.equals(id)) {
                             sharedPreferences.edit().remove(id).apply();
                             kaydet.setBackgroundResource(R.drawable.button_gray);
@@ -220,15 +257,20 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                         kaydet_image.setImageResource(R.drawable.ic_save_gray);
                     }
 
-                }else {
+                } else {
                     kaydet.setBackgroundResource(R.drawable.button_gray);
                     kaydet_image.setImageResource(R.drawable.ic_save_gray);
                     kaydet.setOnClickListener(view -> {
-                        BottomDialog bottomDialog = new BottomDialog(this,firebaseUser,auth,
-                                firebaseFirestore,null,null,null);
                         bottomDialog.loginDialog(1);
                     });
                 }
+
+                tamamini_gor.setOnClickListener(view -> {
+                    bottomDialog.hoursDialog();
+                });
+                tamamini_gor_icon.setOnClickListener(view -> {
+                    bottomDialog.hoursDialog();
+                });
                 break;
             case "tarihiyerler":
                 sibs_title_text.setVisibility(View.GONE);
@@ -239,15 +281,15 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                 String detay7 = intent.getStringExtra("exp");
                 String numara7 = intent.getStringExtra("phone");
                 String videoId7 = intent.getStringExtra("videoId");
-                 id = intent.getStringExtra("id");
+                id = intent.getStringExtra("id");
                 ArrayList<String> images7 = intent.getStringArrayListExtra("imageUrl");
                 ArrayList<String> times7 = intent.getStringArrayListExtra("times");
                 ArrayList<String> location7 = intent.getStringArrayListExtra("location");
 
                 new_id = sharedPreferences.getString(id, "");
 
-                translator.translate(baslik,name7,targetLanguage);
-                translator.translate(detay_text,detay7,targetLanguage);
+                translator.translate(baslik, name7,null);
+                translator.translate(detay_text, detay7,null);
 
                 SimpleDateFormat sdf7 = new SimpleDateFormat("EEEE");
                 String currentTime7 = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
@@ -256,19 +298,19 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
 
                 konum.setText(location7.get(0));
 
-                for (int i=0; i < times7.size(); i++){
+                for (int i = 0; i < times7.size(); i++) {
                     String time = times7.get(i).toLowerCase();
-                    if (time.matches("her zaman açık")){
+                    if (time.matches("her zaman açık")) {
                         //holder.time.setBackgroundResource(R.drawable.ic_ellipse_1);
                         time_button.setBackgroundResource(R.drawable.time_background);
                         time_button.setTextColor(getResources().getColor(R.color.primary_green));
                         time_button.setText("Her zaman açık");
 
-                    } else if (time.matches("kapalı") && time.matches(dayOfTheWeek7)){
+                    } else if (time.matches("kapalı") && time.matches(dayOfTheWeek7)) {
                         time_button.setBackgroundResource(R.drawable.clan);
                         time_button.setTextColor(getResources().getColor(R.color.yellow_variant));
                         time_button.setText("Kapalı");
-                    }  else {
+                    } else {
                         time_button.setBackgroundResource(R.drawable.time_background);
                         time_button.setTextColor(getResources().getColor(R.color.primary_green));
                         time_button.setText("Şu an açık");
@@ -279,31 +321,49 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                     if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         Intent map_intent = new Intent(DetailActivity.this, MapsActivity.class);
                         map_intent.putExtra("name", name7);
+                        map_intent.putExtra("list",list);
+                        readData.adTime(adRequest,this);
                         startActivity(map_intent);
                     } else {
                         ActivityCompat.requestPermissions(DetailActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
                         Toast.makeText(this, "Konum izni gerekli", Toast.LENGTH_SHORT).show();
                     }
+                    readData.adTime(adRequest,this);
                 });
+                if (!videoId7 .equals("")) {
 
-                getLifecycle().addObserver(youTubePlayerView);
-                youTubePlayerView.addYouTubePlayerListener(new  AbstractYouTubePlayerListener(){
-                    @Override
-                    public  void  onReady ( @NonNull YouTubePlayer youTubePlayer ) {
+                    getLifecycle().addObserver(youTubePlayerView);
+                    youTubePlayerView.inflateCustomPlayerUi(R.layout.custom_layout);
+                    youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                        @Override
+                        public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+
+                            youTubePlayer.loadVideo(videoId7,0);
+                        }
+
+                        @Override
+                        public void onVideoDuration(@NonNull YouTubePlayer youTubePlayer, float duration) {
+                            YouTubePlayerTracker tracker = new YouTubePlayerTracker();
+                            youTubePlayer.addListener(tracker);
+
+                            if ( tracker.getVideoDuration() == duration -1) {
+                                youTubePlayer.pause();
+                            }
+                        }
+                    });
 
 
+                } else {
+                    youTubePlayerView.setVisibility(View.GONE);
+                }
 
-                        youTubePlayer.loadVideo(videoId7, 0 );
-                    }
-                });
+                int[] cards7 = new int[]{R.id.card_image0, R.id.card_image1, R.id.card_image2, R.id.card_image3, R.id.card_image4, R.id.card_image5,
+                        R.id.card_image6, R.id.card_image7, R.id.card_image8, R.id.card_image9, R.id.card_image10};
 
-                int[] cards7 = new int[] {R.id.card_image0, R.id.card_image1,R.id.card_image2,R.id.card_image3,R.id.card_image4,R.id.card_image5,
-                        R.id.card_image6,R.id.card_image7,R.id.card_image8,R.id.card_image9,R.id.card_image10};
+                int[] imageId7 = new int[]{R.id.imageview0, R.id.imageview1, R.id.imageview2, R.id.imageview3, R.id.imageview4
+                        , R.id.imageview5, R.id.imageview6, R.id.imageview7, R.id.imageview8, R.id.imageview9, R.id.imageview10};
 
-                int[] imageId7= new int[] {R.id.imageview0,R.id.imageview1,R.id.imageview2,R.id.imageview3,R.id.imageview4
-                        ,R.id.imageview5,R.id.imageview6,R.id.imageview7,R.id.imageview8,R.id.imageview9,R.id.imageview10};
-
-                for (int i=0; i<images7.size(); i++){
+                for (int i = 0; i < images7.size(); i++) {
                     CardView cardView = findViewById(cards7[i]);
                     cardView.setVisibility(View.VISIBLE);
                     System.out.println(i);
@@ -314,23 +374,19 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                     call.setOnClickListener(view -> {
                         Uri uri = Uri.parse("tel:" + numara7);
                         Intent call_intent = new Intent(Intent.ACTION_DIAL, uri);
+                        readData.adTime(adRequest,this);
                         startActivity(call_intent);
+                        readData.adTime(adRequest,this);
                     });
 
 
                 }
 
-                if(firebaseUser != null){
+                if (firebaseUser != null) {
 
                     kaydet.setOnClickListener(view -> {
-            /*
-            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-            SharedPreferences.Editor editor2 = sharedPreferences.edit();
-            editor2.putString(id + "=date", currentDate);
-            editor2.apply();
 
-             */
-                        String new_id2 = sharedPreferences.getString(id,"");
+                        String new_id2 = sharedPreferences.getString(id, "");
                         if (new_id2 != null && new_id2.equals(id)) {
                             sharedPreferences.edit().remove(id).apply();
                             kaydet.setBackgroundResource(R.drawable.button_gray);
@@ -355,15 +411,25 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                         kaydet_image.setImageResource(R.drawable.ic_save_gray);
                     }
 
-                }else {
+                } else {
                     kaydet.setBackgroundResource(R.drawable.button_gray);
                     kaydet_image.setImageResource(R.drawable.ic_save_gray);
                     kaydet.setOnClickListener(view -> {
-                        BottomDialog bottomDialog = new BottomDialog(this,firebaseUser,auth,
-                                firebaseFirestore,null,null,null);
-                        bottomDialog.loginDialog(1);
+                        BottomDialog bottomDialog1 = new BottomDialog(this, firebaseUser, auth,
+                                firebaseFirestore, null, null, null);
+                        bottomDialog1.loginDialog(1);
                     });
                 }
+
+                BottomDialog bottomDialog2 = new BottomDialog(this, firebaseUser, auth,
+                        firebaseFirestore, null, null, null);
+
+                tamamini_gor.setOnClickListener(view -> {
+                    bottomDialog2.hoursDialog();
+                });
+                tamamini_gor_icon.setOnClickListener(view -> {
+                    bottomDialog2.hoursDialog();
+                });
 
                 break;
             case "onemlikisiler":
@@ -378,7 +444,7 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                 String children = intent.getStringExtra("children");
                 String exp = intent.getStringExtra("exp");
                 String sibs = intent.getStringExtra("sibs");
-                 id = intent.getStringExtra("id");
+                id = intent.getStringExtra("id");
                 String image2 = intent.getStringExtra("image");
                 String name2 = intent.getStringExtra("name");
 
@@ -387,6 +453,11 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                 sibs_text.setText(sibs);
                 baslik.setText(name2);
                 CardView cardView = findViewById(R.id.card_image0);
+                Size size = new Size(this);
+
+
+                size.setMargin(cardView, 24, 0, 16, 0);
+
                 cardView.setVisibility(View.VISIBLE);
                 ImageView imageView = findViewById(R.id.imageview0);
                 imageView.setVisibility(View.VISIBLE);
@@ -398,18 +469,31 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                 sibs_layout.setVisibility(View.GONE);
                 children_layout.setVisibility(View.GONE);
                 children_title_text.setVisibility(View.GONE);
+                youTubePlayerView.setVisibility(View.GONE);
                 String name1 = intent.getStringExtra("name");
                 String detay1 = intent.getStringExtra("exp");
                 String numara1 = intent.getStringExtra("phone");
                 String videoId1 = intent.getStringExtra("videoId");
-               //  id = intent.getStringExtra("id");
+                String location2 = intent.getStringExtra("location2");
+                konum.setText(location2);
+                //  id = intent.getStringExtra("id");
                 ArrayList<String> images1 = intent.getStringArrayListExtra("imageUrl");
                 ArrayList<String> times1 = intent.getStringArrayListExtra("times");
                 ArrayList<String> location1 = intent.getStringArrayListExtra("location");
-               // new_id = sharedPreferences.getString(id, "");
+                // new_id = sharedPreferences.getString(id, "");
 
-                translator.translate(baslik,name1,targetLanguage);
-                translator.translate(detay_text,detay1,targetLanguage);
+                translator.translate(baslik, name1,null);
+                translator.translate(detay_text, detay1,null);
+
+                BottomDialog bottomDialog3 = new BottomDialog(this, firebaseUser, auth,
+                        firebaseFirestore, null, null, null);
+
+                tamamini_gor.setOnClickListener(view -> {
+                    bottomDialog3.hoursDialog();
+                });
+                tamamini_gor_icon.setOnClickListener(view -> {
+                    bottomDialog3.hoursDialog();
+                });
 
                 SimpleDateFormat sdf1 = new SimpleDateFormat("EEEE");
                 String currentTime1 = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
@@ -418,19 +502,19 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
 
                 //konum.setText(location.get(0));
 
-                for (int i=0; i < times1.size(); i++){
+                for (int i = 0; i < times1.size(); i++) {
                     String time = times1.get(i).toLowerCase();
-                    if (time.matches("her zaman açık")){
+                    if (time.matches("her zaman açık")) {
                         //holder.time.setBackgroundResource(R.drawable.ic_ellipse_1);
                         time_button.setBackgroundResource(R.drawable.time_background);
                         time_button.setTextColor(getResources().getColor(R.color.primary_green));
                         time_button.setText("Her zaman açık");
 
-                    } else if (time.matches("kapalı") && time.matches(dayOfTheWeek1)){
+                    } else if (time.matches("kapalı") && time.matches(dayOfTheWeek1)) {
                         time_button.setBackgroundResource(R.drawable.clan);
                         time_button.setTextColor(getResources().getColor(R.color.yellow_variant));
                         time_button.setText("Kapalı");
-                    }  else {
+                    } else {
                         time_button.setBackgroundResource(R.drawable.time_background);
                         time_button.setTextColor(getResources().getColor(R.color.primary_green));
                         time_button.setText("Şu an açık");
@@ -441,44 +525,33 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                     if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         Intent map_intent = new Intent(DetailActivity.this, MapsActivity.class);
                         map_intent.putExtra("name", name1);
+                        map_intent.putExtra("list",list);
+                        readData.adTime(adRequest,this);
                         startActivity(map_intent);
                     } else {
                         ActivityCompat.requestPermissions(DetailActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
                         Toast.makeText(this, "Konum izni gerekli", Toast.LENGTH_SHORT).show();
                     }
+                    readData.adTime(adRequest,this);
                 });
 
-                getLifecycle().addObserver(youTubePlayerView);
-                youTubePlayerView.addYouTubePlayerListener(new  AbstractYouTubePlayerListener(){
-                    @Override
-                    public  void  onReady ( @NonNull YouTubePlayer youTubePlayer ) {
+                CardView cardView2 = findViewById(R.id.card_image0);
+                cardView2.setVisibility(View.VISIBLE);
+                ImageView imageView2 = findViewById(R.id.imageview0);
+                imageView2.setVisibility(View.VISIBLE);
+                Glide.with(this).load(images1.get(0)).into(imageView2);
+                Size size2 = new Size(this);
 
 
+                size2.setMargin(cardView2, 24, 0, 16, 0);
 
-                        youTubePlayer.loadVideo(videoId1, 0 );
-                    }
+                call.setOnClickListener(view -> {
+                    Uri uri = Uri.parse("tel:" + numara1);
+                    Intent call_intent = new Intent(Intent.ACTION_DIAL, uri);
+                    readData.adTime(adRequest,this);
+                    startActivity(call_intent);
+                    readData.adTime(adRequest,this);
                 });
-
-                int[] cards1 = new int[] {R.id.card_image0, R.id.card_image1,R.id.card_image2,R.id.card_image3,R.id.card_image4,R.id.card_image5,
-                        R.id.card_image6,R.id.card_image7,R.id.card_image8,R.id.card_image9,R.id.card_image10};
-
-                int[] imageId1= new int[] {R.id.imageview0,R.id.imageview1,R.id.imageview2,R.id.imageview3,R.id.imageview4
-                        ,R.id.imageview5,R.id.imageview6,R.id.imageview7,R.id.imageview8,R.id.imageview9,R.id.imageview10};
-
-                for (int i=0; i<images1.size(); i++) {
-                    CardView cardView1 = findViewById(cards1[i]);
-                    cardView1.setVisibility(View.VISIBLE);
-                    System.out.println(i);
-                    ImageView imageView1 = findViewById(imageId1[i]);
-                    imageView1.setVisibility(View.VISIBLE);
-                    Glide.with(this).load(images1.get(i)).into(imageView1);
-                }
-
-                    call.setOnClickListener(view -> {
-                        Uri uri = Uri.parse("tel:" + numara1);
-                        Intent call_intent = new Intent(Intent.ACTION_DIAL, uri);
-                        startActivity(call_intent);
-                    });
                 break;
             case "digerbilgiler":
                 youTubePlayerView.setVisibility(View.GONE);
@@ -505,6 +578,13 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
                 ImageView imageView1 = findViewById(R.id.imageview0);
                 imageView1.setVisibility(View.VISIBLE);
                 Glide.with(this).load(image3).into(imageView1);
+                Size size1 = new Size(this);
+
+
+                translator.translate(baslik, name3,null);
+                translator.translate(detay_text, exp1,null);
+
+                size1.setMargin(cardView1, 24, 0, 16, 0);
                 break;
         }
 
@@ -523,14 +603,20 @@ public class DetailActivity extends AppCompatActivity implements VideoAdapter.Ad
 
     @Override
     public void addLifeCycleCallBack(YouTubePlayerView youTubePlayerView) {
-            getLifecycle().addObserver(youTubePlayerView);
+        getLifecycle().addObserver(youTubePlayerView);
     }
 
     public boolean checkLocationPermission() {
         if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            return true;}
-        else {
+            return true;
+        } else {
             ActivityCompat.requestPermissions(DetailActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-            return false;}
+            return false;
+        }
+    }
+    @Override
+    protected void onResume() {
+        readData.adTime(adRequest,this);
+        super.onResume();
     }
 }

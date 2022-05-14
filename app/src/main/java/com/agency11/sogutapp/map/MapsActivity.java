@@ -62,6 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     GeoPoint geoPoint;
     String name;
     Query query;
+    String collection;
 
 
     @Override
@@ -85,7 +86,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent intent = getIntent();
          name = intent.getStringExtra("name");
-         query = FirebaseFirestore.getInstance().collection("tarihiyerler")
+         collection = intent.getStringExtra("list");
+
+         query = FirebaseFirestore.getInstance().collection(collection)
                 .whereEqualTo("name", name);
 
     }
@@ -144,7 +147,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //dest = new LatLng(41.0369,28.9841);
         //mMap.addMarker(new MarkerOptions().position(origion).title("Ertuğrul Gazi"));
         //mMap.addMarker(new MarkerOptions().position(dest).title("Buradayım"));
-       // getDirection("40.0255" + "," + "30.1793", "41.0369" + "," + "28.9841");
+       // getDirection("40.0255" + "," + "30.1793", "41.0369" + "," + "28.9841"); AIzaSyDib9LERPzu_gBtR9staLTqjMM8yWBAWo4
     }
 
     private void getDirection(String origin, String destination) {

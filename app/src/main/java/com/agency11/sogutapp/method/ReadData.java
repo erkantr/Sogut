@@ -1,17 +1,22 @@
-package com.agency11.sogutapp;
+package com.agency11.sogutapp.method;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.agency11.sogutapp.R;
+import com.agency11.sogutapp.activity.AdsActivity;
+import com.agency11.sogutapp.activity.ListActivity;
 import com.agency11.sogutapp.adapter.ListAdapter;
 import com.agency11.sogutapp.model.Diger_Bilgiler;
 import com.agency11.sogutapp.model.Diger_Yerler;
@@ -19,6 +24,14 @@ import com.agency11.sogutapp.model.Onemli_Kisiler;
 import com.agency11.sogutapp.model.Tarihi_Yerler;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -30,10 +43,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EventListener;
 import java.util.Map;
+import java.util.Set;
 
 public class ReadData {
 
@@ -59,7 +74,7 @@ public class ReadData {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
+                            ArrayList<Diger_Bilgiler> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Diger_Bilgiler update = new Diger_Bilgiler(
@@ -69,8 +84,17 @@ public class ReadData {
                                         document.getData().get("name").toString());
 
 
-                                diger_bilgilers.add(update);
+                                list.add(update);
                             }
+
+                            for(int i=0;i<list.size();i++){
+                                if(i%3==0 && i!=0)
+                                {
+                                    diger_bilgilers.add(null);
+                                }
+                                diger_bilgilers.add(list.get(i));
+                            }
+
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext.getApplicationContext());
                             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                             recyclerView.setLayoutManager(linearLayoutManager);
@@ -82,6 +106,7 @@ public class ReadData {
                             recyclerView.setAdapter(adapter);
                             recyclerView.setHasFixedSize(true);
                             adapter.notifyDataSetChanged();
+
 
                         } else {
                             Log.w("TAG", "Error getting documents.", task.getException());
@@ -114,6 +139,8 @@ public class ReadData {
 
                                 onemli_kisilers.add(update);
                             }
+                            onemli_kisilers.add(null);
+
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext.getApplicationContext());
                             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                             recyclerView.setLayoutManager(linearLayoutManager);
@@ -125,6 +152,8 @@ public class ReadData {
                             recyclerView.setAdapter(adapter);
                             recyclerView.setHasFixedSize(true);
                             adapter.notifyDataSetChanged();
+
+
 
                         } else {
                             Log.w("TAG", "Error getting documents.", task.getException());
@@ -141,9 +170,11 @@ public class ReadData {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
+                            ArrayList<Diger_Yerler> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Diger_Yerler update = new Diger_Yerler(
+                                        document.getData().get("location").toString(),
                                         document.getId(),
                                         document.getData().get("exp").toString(),
                                         (ArrayList<String>) document.get("imageUrl"),
@@ -153,9 +184,17 @@ public class ReadData {
                                         (ArrayList<String>) document.get("times"),
                                         document.getData().get("videoId").toString());
 
-
-                                diger_yerlers.add(update);
+                                list.add(update);
                             }
+
+                            for(int i=0;i<list.size();i++){
+                                if(i%3==0 && i!=0)
+                                {
+                                    diger_yerlers.add(null);
+                                }
+                                diger_yerlers.add(list.get(i));
+                            }
+
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext.getApplicationContext());
                             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                             recyclerView.setLayoutManager(linearLayoutManager);
@@ -167,6 +206,8 @@ public class ReadData {
                             recyclerView.setAdapter(adapter);
                             recyclerView.setHasFixedSize(true);
                             adapter.notifyDataSetChanged();
+
+
 
                         } else {
                             Log.w("TAG", "Error getting documents.", task.getException());
@@ -182,7 +223,7 @@ public class ReadData {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
+                            ArrayList<Tarihi_Yerler> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Tarihi_Yerler update = new Tarihi_Yerler(
@@ -197,9 +238,16 @@ public class ReadData {
                                         document.getData().get("videoId").toString(),
                                         document.getGeoPoint("location_id"));
 
-
-                                tarihi_yerlers.add(update);
+                                list.add(update);
                             }
+                            for(int i=0;i<list.size();i++){
+                                if(i%3==0 && i!=0)
+                                {
+                                    tarihi_yerlers.add(null);
+                                }
+                                tarihi_yerlers.add(list.get(i));
+                            }
+
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext.getApplicationContext());
                             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                             recyclerView.setLayoutManager(linearLayoutManager);
@@ -211,6 +259,7 @@ public class ReadData {
                             recyclerView.setAdapter(adapter);
                             recyclerView.setHasFixedSize(true);
                             adapter.notifyDataSetChanged();
+
 
                         } else {
                             Log.w("TAG", "Error getting documents.", task.getException());
@@ -319,9 +368,66 @@ public class ReadData {
 
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+
                 }
             });
         }
     }
 
+    public void adTime(AdRequest adRequest, Activity activity) {
+        SharedPreferences preferences = activity.getSharedPreferences("ad", Context.MODE_PRIVATE);
+        int click = preferences.getInt("click", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        System.out.println("click = "+ click);
+
+        if (click < 10) {
+            editor.putInt("click", 1+click);
+            editor.apply();
+        } else {
+            editor.putInt("click", 0);
+            /*
+            RequestConfiguration requestConfiguration = new RequestConfiguration.Builder()
+                    .setTestDeviceIds(Arrays.asList("EAD98D52B6934D07B9DAD189F4BACB64")).build();
+            MobileAds.setRequestConfiguration(requestConfiguration);
+
+             */
+            MobileAds.initialize(activity);
+            adRequest = new AdRequest.Builder().build();
+            InterstitialAd.load(activity,activity.getString(R.string.interstitial_ad_unit_id), adRequest,
+                    new InterstitialAdLoadCallback() {
+                        @Override
+                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            interstitialAd.show(activity);
+
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Log.d("messages", "The ad failed to show.");
+                                }
+
+                                @Override
+                                public void onAdShowedFullScreenContent() {
+                                    super.onAdShowedFullScreenContent();
+                                    Log.d("messages", "The ad was shown.");
+                                }
+
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Log.d("messages", "The ad was dismissed.");
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                            super.onAdFailedToLoad(loadAdError);
+                            Toast.makeText(activity, "a"+ loadAdError, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            editor.apply();
+        }
+    }
 }

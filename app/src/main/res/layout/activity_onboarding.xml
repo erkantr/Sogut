@@ -22,7 +22,6 @@
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:adjustViewBounds="true"
-                android:paddingTop="78dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic__image2"/>
 
@@ -75,37 +74,26 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:gravity="bottom|end"
-
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
 
-                    <RelativeLayout
+                    <Button
                         android:id="@+id/ilerle_button"
                         android:layout_width="88dp"
                         android:layout_height="36dp"
+                        android:background="@drawable/button2"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="42dp"
-                        android:background="@drawable/button2"
-                        android:gravity="center">
-
-                        <TextView
-                            android:id="@+id/ilerle_button_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_medium"
-                            android:text="@string/ilerle"
-                            android:textColor="@color/white"
-                            android:textSize="13sp" />
-
-                        <ImageView
-                            android:id="@+id/ilerle_button_image"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_toRightOf="@id/ilerle_button_text"
-                            android:src="@drawable/ic_send" />
-
-                    </RelativeLayout>
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="İlerle"
+                        android:textSize="13sp"
+                        android:textAllCaps="false"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="12dp"
+                        android:textColor="@color/white"
+                        android:drawableRight="@drawable/ic_send"/>
                 </RelativeLayout>
             </LinearLayout>
 

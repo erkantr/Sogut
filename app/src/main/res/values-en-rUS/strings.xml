@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sogut</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="metin1">All rights reserved.\nIn case of unauthorized use of any photo or information, you are deemed to have accepted the monetary allowance.</string>
+    <string name="tarihini_ogren">Learn your past</string>
+    <string name="metin2">Visit historical figures in the city and learn about historical facts!</string>
+    <string name="geri">Back</string>
+    <string name="merhaba">Hello,\n</string>
+    <string name="ilerle">Next</string>
+    <string name="sogut_rehber_uygulamasi">Söğüt Guide Application</string>
+    <string name="tarihi_yerler">Historical Attractions</string>
+    <string name="onemli_kisiler">Important People</string>
+    <string name="su_an_acik">Open now</string>
+    <string name="diger_yerler">Other Places</string>
+    <string name="diger_bilgiler">Other Information</string>
+    <string name="kaydedilenler">Saved</string>
+    <string name="hakkinda">About</string>
+    <string name="merhaba_dunyali">Hello, \nEarthling</string>
+    <string name="iletisim_adresleri">Contact</string>
+    <string name="her_zaman_acik">Always open</string>
+    <string name="adres">Address:</string>
+    <string name="acik_oldugu_saatler">Opening hours:</string>
+    <string name="her_zaman">Always</string>
+    <string name="tamamini_gor">See all</string>
+    <string name="aciklama">Description</string>
+    <string name="gitmek_istiyorum">I’d like to visit</string>
+    <string name="profil">Profile</string>
+    <string name="sifre_ayarlari">Password settings</string>
+    <string name="sifremi_degistir">Change my password</string>
+    <string name="dil_ayarlari">Language settings</string>
+    <string name="dil_degistir">Change language</string>
+    <string name="hesap_ayarlari">Account settings</string>
+    <string name="devam_etmek_icin">To continue</string>
+    <string name="giris_yap">Login</string>
+    <string name="e_mail_adresi">E-mail address</string>
+    <string name="sifre">Password</string>
+    <string name="ya_da">Or</string>
+    <string name="bir_hesabin_yok_mu">Dont have an account?</string>
+    <string name="kayit_ol">Register</string>
+    <string name="sifremi_unuttum">Forgot my password</string>
+    <string name="eski_sifre_gecici">Old password</string>
+    <string name="sifre_tekrari">Confirm new password</string>
+    <string name="gonder">Submit</string>
+    <string name="bir_hesabin_var_mi">Do you have an account</string>
+    <string name="kullanici_adi">User name</string>
+    <string name="sifre_degistirme_basarili">Change password \nSuccessful</string>
+    <string name="title_activity_ads">AdsActivity</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="acik_olma_saatleri">Opening hours</string>
+    <string name="dil_sec">Select language</string>
+    <string name="interstitial_ad_sample">Interstitial Ad Sample</string>
+    <string name="start_level">Level 1</string>
+    <string name="next_level">Next Level</string>
+    <string name="kardesleri">Siblings</string>
+    <string name="cocuklari">Children</string>
+
+    <string name="interstitial_ad_unit_id">ca-app-pub-5878973970188801/5356825732
+</string>
+    <string name="proje_yoneticisi">Project Manager - Interface Designer</string>
+    <string name="mobil_uygulama_gelistiricisi">Mobile Application Developer</string>
+    <string name="web_developer">Web Developer</string>
+    <string name="proje_fikir_sahibi">Project Idea Owner - Content and Translation Specialist</string>
+</resources>

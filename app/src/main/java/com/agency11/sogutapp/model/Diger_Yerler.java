@@ -13,12 +13,13 @@ public class Diger_Yerler {
     ArrayList<String> times;
     String videoId;
     String id;
+    String location;
 
     public Diger_Yerler(){
 
     }
 
-    public Diger_Yerler(String id,String exp, ArrayList<String> imageUrl, GeoPoint location_id, String name, String phone, ArrayList<String> times, String videoId) {
+    public Diger_Yerler(String location,String id,String exp, ArrayList<String> imageUrl, GeoPoint location_id, String name, String phone, ArrayList<String> times, String videoId) {
         this.exp = exp;
         this.imageUrl = imageUrl;
         this.location_id = location_id;
@@ -27,6 +28,15 @@ public class Diger_Yerler {
         this.times = times;
         this.videoId = videoId;
         this.id = id;
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getId() {

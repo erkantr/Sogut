@@ -1,8 +1,7 @@
-package com.agency11.sogutapp;
+package com.agency11.sogutapp.method;
 
 import static android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -10,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Path;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -28,6 +26,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
+import com.agency11.sogutapp.R;
 import com.agency11.sogutapp.activity.MainActivity;
 import com.agency11.sogutapp.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,7 +58,6 @@ public class BottomDialog {
     ImageView profile_image;
     LinearLayout linearLayout;
     Dialog dialog;
-    Context context;
 
     public BottomDialog(Activity activity, FirebaseUser firebaseUser, FirebaseAuth auth, FirebaseFirestore firebaseFirestore,
                         TextView kullanici_adi, ImageView profile_image, LinearLayout linearLayout) {
@@ -70,6 +68,9 @@ public class BottomDialog {
         this.kullanici_adi = kullanici_adi;
         this.profile_image = profile_image;
         this.linearLayout = linearLayout;
+        SharedPreferences sharedPreferences2 = activity.getSharedPreferences("lang1", Context.MODE_PRIVATE);
+        String targetLanguage = sharedPreferences2.getString("language","");
+        LocaleHelper.setLocale(activity,targetLanguage);
     }
 
 
@@ -182,8 +183,8 @@ public class BottomDialog {
 
                                     //if (page == 1) {
                                         activity.startActivity(new Intent(activity, MainActivity.class));
-                                        activity.finish();
                                         activity.overridePendingTransition(0, 0);
+                                        activity.finish();
                                    // }
 
                                     if (page == 2){
@@ -507,6 +508,7 @@ public class BottomDialog {
         RelativeLayout login = window.findViewById(R.id.login_button);
         TextView login_button_text = window.findViewById(R.id.login_button_text);
         ImageView login_button_image = window.findViewById(R.id.login_button_image);
+        RelativeLayout successful_layout = window.findViewById(R.id.successful_layout);
 
         size.setMargin(image_success, 0, 24, 24, 0);
         size.setMargin(text_success, 0, 24, 0, 0);
@@ -517,6 +519,7 @@ public class BottomDialog {
         size.setWidth(login_button_image, 18);
         size.setHeight(login_button_image, 18);
         size.setMargin(login_button_image, 8, 0, 0, 0);
+        size.setHeight(successful_layout,584);
 
         image_success.setOnClickListener(view1 -> {
             dialog.cancel();
@@ -681,6 +684,30 @@ public class BottomDialog {
         ImageView ru = window.findViewById(R.id.ru);
         CardView main_card = window.findViewById(R.id.main_card);
 
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("lang1", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        tr.setOnClickListener(view -> {
+            LocaleHelper.setLocale(activity,"tr");
+            editor.putString("language", "tr");
+            editor.apply();
+            activity.startActivity(new Intent(activity,MainActivity.class));
+        });
+        uk.setOnClickListener(view -> {
+            LocaleHelper.setLocale(activity,"en");
+            editor.putString("language", "en");
+            editor.apply();
+            activity.startActivity(new Intent(activity,MainActivity.class));
+        });
+
+        ru.setOnClickListener(view -> {
+            LocaleHelper.setLocale(activity,"ru");
+            editor.putString("language", "ru");
+            editor.apply();
+            activity.startActivity(new Intent(activity,MainActivity.class));
+        });
+
+        /*
         size.setWidth(dil_sec,47);
         size.setHeight(dil_sec,21);
         size.setMargin(dil_sec,16,18,0,0);
@@ -707,7 +734,7 @@ public class BottomDialog {
         size.setWidth(main_card,343);
         size.setHeight(main_card,323);
 
-
+        */
 
 
         close.setOnClickListener(view -> {
@@ -752,6 +779,7 @@ public class BottomDialog {
         LinearLayout linear_activity = window.findViewById(R.id.linear_activity);
         View view_activity = window.findViewById(R.id.view_activity);
 
+        /*
         size.setWidth(main_card,343);
         size.setHeight(main_card,323);
         size.setMargin(text_hours,16,18,0,0);
@@ -760,6 +788,8 @@ public class BottomDialog {
         size.setMargin(linear_activity,0,17,0,0);
         size.setWidth(view_activity,0);
         size.setHeight(view_activity,1);
+
+         */
 
 
         close.setOnClickListener(view -> {

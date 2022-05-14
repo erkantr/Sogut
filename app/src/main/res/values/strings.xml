@@ -15,9 +15,10 @@
     <string name="kaydedilenler">Kaydedilenler</string>
     <string name="hakkinda">Hakkında</string>
     <string name="merhaba_dunyali">Merhaba, \nDünyalı</string>
+    <string name="merhaba">Merhaba,\n</string>
     <string name="iletisim_adresleri">İletişim adresleri</string>
-    <string name="turbeler">Türbeler</string>
     <string name="her_zaman_acik">Her zaman açık</string>
+    <string name="su_an_acik">Şu an açık</string>
     <string name="adres">Adres:</string>
     <string name="acik_oldugu_saatler">Açık olduğu saatler:</string>
     <string name="her_zaman">Her zaman</string>
@@ -28,9 +29,8 @@
     <string name="sifre_ayarlari">Şifre ayarları</string>
     <string name="sifremi_degistir">Şifremi değiştir</string>
     <string name="dil_ayarlari">Dil ayarları</string>
-    <string name="dil_degistir">Dil değiştir</string> 
+    <string name="dil_degistir">Dil değiştir</string>
     <string name="hesap_ayarlari">Hesap ayarları</string>
-    <string name="ertugrul_gazi_veya_ertugrul">Ertuğrul Gazi veya Ertuğrul Bey, 13. yüzyılın ortalarınd...</string>
     <string name="devam_etmek_icin">Devam etmek için</string>
     <string name="giris_yap">Giriş Yap</string>
     <string name="e_mail_adresi">E-mail Adresi</string>
@@ -57,7 +57,13 @@
         This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
         For more information, see https://support.google.com/admob/answer/3052638
     <!- -->
-    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-5878973970188801/5356825732</string>
+    <string name="proje_yoneticisi">Proje Yöneticisi - Arayüz Tasarımcısı</string>
+    <string name="mobil_uygulama_gelistiricisi">Mobil Uygulama Geliştiricisi</string>
+    <string name="web_developer">Web Developer</string>
+    <string name="proje_fikir_sahibi">Proje Fikir Sahibi - İçerik ve Çeviri Sorumlusu</string>
+    <string name="kardesleri">Kardeşleri</string>
+    <string name="cocuklari">Çocukları</string>
 
 
 </resources>
